@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "generatedAt": "2026-06-30T18:46:00.997Z",
+  "generatedAt": "2026-06-30T22:54:42.897Z",
   "baseURL": "http://127.0.0.1:3100",
   "checks": [
     {
@@ -31,6 +31,15 @@
       "status": "ok"
     },
     {
+      "name": "tablet-768x1024",
+      "path": "/catalogue?certified=true",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
       "name": "mobile-430x932",
       "path": "/catalogue",
       "viewport": {
@@ -45,6 +54,33 @@
       "viewport": {
         "width": 390,
         "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "mobile-360x800",
+      "path": "/catalogue?mode=AUCTION",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "mobile-320x568",
+      "path": "/connexion",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "mobile-landscape-932x430",
+      "path": "/annonces/9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "viewport": {
+        "width": 932,
+        "height": 430
       },
       "status": "ok"
     },
@@ -76,6 +112,15 @@
       "status": "ok"
     },
     {
+      "name": "listing-detail-desktop",
+      "path": "/annonces/9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
       "name": "login-desktop",
       "path": "/connexion",
       "viewport": {
@@ -87,6 +132,1636 @@
     {
       "name": "navigation-catalogue-filtre",
       "path": "/catalogue?type=RED",
+      "status": "ok"
+    },
+    {
+      "name": "catalogue-filtres-combines",
+      "path": "/catalogue?mode=AUCTION&certified=true",
+      "status": "ok"
+    },
+    {
+      "name": "login-erreur-accessible",
+      "path": "/connexion",
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-home",
+      "path": "/",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-catalogue",
+      "path": "/catalogue",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-catalogue-type-RED",
+      "path": "/catalogue?type=RED",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-catalogue-mode-AUCTION",
+      "path": "/catalogue?mode=AUCTION",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-catalogue-certified-true",
+      "path": "/catalogue?certified=true",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-catalogue-region-bordeaux",
+      "path": "/catalogue?region=bordeaux",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-catalogue-maxPrice-100",
+      "path": "/catalogue?maxPrice=100",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-catalogue-q-hennessy",
+      "path": "/catalogue?q=hennessy",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-catalogue-q-aucun-resultat-probable",
+      "path": "/catalogue?q=aucun-resultat-probable",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-annonces-9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "path": "/annonces/9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-annonces-6129cefb-140a-4358-80c0-687e30210c35",
+      "path": "/annonces/6129cefb-140a-4358-80c0-687e30210c35",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-restaurants",
+      "path": "/restaurants",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-restaurants-138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "path": "/restaurants/138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-encheres",
+      "path": "/encheres",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-vendre",
+      "path": "/vendre",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-connexion",
+      "path": "/connexion",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-espace",
+      "path": "/espace",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-admin",
+      "path": "/admin",
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-home",
+      "path": "/",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-catalogue",
+      "path": "/catalogue",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-catalogue-type-RED",
+      "path": "/catalogue?type=RED",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-catalogue-mode-AUCTION",
+      "path": "/catalogue?mode=AUCTION",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-catalogue-certified-true",
+      "path": "/catalogue?certified=true",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-catalogue-region-bordeaux",
+      "path": "/catalogue?region=bordeaux",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-catalogue-maxPrice-100",
+      "path": "/catalogue?maxPrice=100",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-catalogue-q-hennessy",
+      "path": "/catalogue?q=hennessy",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-catalogue-q-aucun-resultat-probable",
+      "path": "/catalogue?q=aucun-resultat-probable",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-annonces-9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "path": "/annonces/9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-annonces-6129cefb-140a-4358-80c0-687e30210c35",
+      "path": "/annonces/6129cefb-140a-4358-80c0-687e30210c35",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-restaurants",
+      "path": "/restaurants",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-restaurants-138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "path": "/restaurants/138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-encheres",
+      "path": "/encheres",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-vendre",
+      "path": "/vendre",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-connexion",
+      "path": "/connexion",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-espace",
+      "path": "/espace",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-laptop-admin",
+      "path": "/admin",
+      "viewport": {
+        "name": "laptop",
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-home",
+      "path": "/",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-catalogue",
+      "path": "/catalogue",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-catalogue-type-RED",
+      "path": "/catalogue?type=RED",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-catalogue-mode-AUCTION",
+      "path": "/catalogue?mode=AUCTION",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-catalogue-certified-true",
+      "path": "/catalogue?certified=true",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-catalogue-region-bordeaux",
+      "path": "/catalogue?region=bordeaux",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-catalogue-maxPrice-100",
+      "path": "/catalogue?maxPrice=100",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-catalogue-q-hennessy",
+      "path": "/catalogue?q=hennessy",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-catalogue-q-aucun-resultat-probable",
+      "path": "/catalogue?q=aucun-resultat-probable",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-annonces-9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "path": "/annonces/9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-annonces-6129cefb-140a-4358-80c0-687e30210c35",
+      "path": "/annonces/6129cefb-140a-4358-80c0-687e30210c35",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-restaurants",
+      "path": "/restaurants",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-restaurants-138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "path": "/restaurants/138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-encheres",
+      "path": "/encheres",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-vendre",
+      "path": "/vendre",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-connexion",
+      "path": "/connexion",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-espace",
+      "path": "/espace",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-landscape-admin",
+      "path": "/admin",
+      "viewport": {
+        "name": "tablet-landscape",
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-home",
+      "path": "/",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-catalogue",
+      "path": "/catalogue",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-catalogue-type-RED",
+      "path": "/catalogue?type=RED",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-catalogue-mode-AUCTION",
+      "path": "/catalogue?mode=AUCTION",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-catalogue-certified-true",
+      "path": "/catalogue?certified=true",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-catalogue-region-bordeaux",
+      "path": "/catalogue?region=bordeaux",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-catalogue-maxPrice-100",
+      "path": "/catalogue?maxPrice=100",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-catalogue-q-hennessy",
+      "path": "/catalogue?q=hennessy",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-catalogue-q-aucun-resultat-probable",
+      "path": "/catalogue?q=aucun-resultat-probable",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-annonces-9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "path": "/annonces/9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-annonces-6129cefb-140a-4358-80c0-687e30210c35",
+      "path": "/annonces/6129cefb-140a-4358-80c0-687e30210c35",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-restaurants",
+      "path": "/restaurants",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-restaurants-138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "path": "/restaurants/138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-encheres",
+      "path": "/encheres",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-vendre",
+      "path": "/vendre",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-connexion",
+      "path": "/connexion",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-espace",
+      "path": "/espace",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-tablet-portrait-admin",
+      "path": "/admin",
+      "viewport": {
+        "name": "tablet-portrait",
+        "width": 768,
+        "height": 1024
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-home",
+      "path": "/",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-catalogue",
+      "path": "/catalogue",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-catalogue-type-RED",
+      "path": "/catalogue?type=RED",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-catalogue-mode-AUCTION",
+      "path": "/catalogue?mode=AUCTION",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-catalogue-certified-true",
+      "path": "/catalogue?certified=true",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-catalogue-region-bordeaux",
+      "path": "/catalogue?region=bordeaux",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-catalogue-maxPrice-100",
+      "path": "/catalogue?maxPrice=100",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-catalogue-q-hennessy",
+      "path": "/catalogue?q=hennessy",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-catalogue-q-aucun-resultat-probable",
+      "path": "/catalogue?q=aucun-resultat-probable",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-annonces-9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "path": "/annonces/9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-annonces-6129cefb-140a-4358-80c0-687e30210c35",
+      "path": "/annonces/6129cefb-140a-4358-80c0-687e30210c35",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-restaurants",
+      "path": "/restaurants",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-restaurants-138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "path": "/restaurants/138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-encheres",
+      "path": "/encheres",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-vendre",
+      "path": "/vendre",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-connexion",
+      "path": "/connexion",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-espace",
+      "path": "/espace",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-large-admin",
+      "path": "/admin",
+      "viewport": {
+        "name": "mobile-large",
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-home",
+      "path": "/",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-catalogue",
+      "path": "/catalogue",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-catalogue-type-RED",
+      "path": "/catalogue?type=RED",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-catalogue-mode-AUCTION",
+      "path": "/catalogue?mode=AUCTION",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-catalogue-certified-true",
+      "path": "/catalogue?certified=true",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-catalogue-region-bordeaux",
+      "path": "/catalogue?region=bordeaux",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-catalogue-maxPrice-100",
+      "path": "/catalogue?maxPrice=100",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-catalogue-q-hennessy",
+      "path": "/catalogue?q=hennessy",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-catalogue-q-aucun-resultat-probable",
+      "path": "/catalogue?q=aucun-resultat-probable",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-annonces-9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "path": "/annonces/9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-annonces-6129cefb-140a-4358-80c0-687e30210c35",
+      "path": "/annonces/6129cefb-140a-4358-80c0-687e30210c35",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-restaurants",
+      "path": "/restaurants",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-restaurants-138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "path": "/restaurants/138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-encheres",
+      "path": "/encheres",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-vendre",
+      "path": "/vendre",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-connexion",
+      "path": "/connexion",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-espace",
+      "path": "/espace",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-regular-admin",
+      "path": "/admin",
+      "viewport": {
+        "name": "mobile-regular",
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-home",
+      "path": "/",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-catalogue",
+      "path": "/catalogue",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-catalogue-type-RED",
+      "path": "/catalogue?type=RED",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-catalogue-mode-AUCTION",
+      "path": "/catalogue?mode=AUCTION",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-catalogue-certified-true",
+      "path": "/catalogue?certified=true",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-catalogue-region-bordeaux",
+      "path": "/catalogue?region=bordeaux",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-catalogue-maxPrice-100",
+      "path": "/catalogue?maxPrice=100",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-catalogue-q-hennessy",
+      "path": "/catalogue?q=hennessy",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-catalogue-q-aucun-resultat-probable",
+      "path": "/catalogue?q=aucun-resultat-probable",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-annonces-9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "path": "/annonces/9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-annonces-6129cefb-140a-4358-80c0-687e30210c35",
+      "path": "/annonces/6129cefb-140a-4358-80c0-687e30210c35",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-restaurants",
+      "path": "/restaurants",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-restaurants-138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "path": "/restaurants/138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-encheres",
+      "path": "/encheres",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-vendre",
+      "path": "/vendre",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-connexion",
+      "path": "/connexion",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-espace",
+      "path": "/espace",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-small-admin",
+      "path": "/admin",
+      "viewport": {
+        "name": "mobile-small",
+        "width": 360,
+        "height": 800
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-home",
+      "path": "/",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-catalogue",
+      "path": "/catalogue",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-catalogue-type-RED",
+      "path": "/catalogue?type=RED",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-catalogue-mode-AUCTION",
+      "path": "/catalogue?mode=AUCTION",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-catalogue-certified-true",
+      "path": "/catalogue?certified=true",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-catalogue-region-bordeaux",
+      "path": "/catalogue?region=bordeaux",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-catalogue-maxPrice-100",
+      "path": "/catalogue?maxPrice=100",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-catalogue-q-hennessy",
+      "path": "/catalogue?q=hennessy",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-catalogue-q-aucun-resultat-probable",
+      "path": "/catalogue?q=aucun-resultat-probable",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-annonces-9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "path": "/annonces/9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-annonces-6129cefb-140a-4358-80c0-687e30210c35",
+      "path": "/annonces/6129cefb-140a-4358-80c0-687e30210c35",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-restaurants",
+      "path": "/restaurants",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-restaurants-138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "path": "/restaurants/138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-encheres",
+      "path": "/encheres",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-vendre",
+      "path": "/vendre",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-connexion",
+      "path": "/connexion",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-espace",
+      "path": "/espace",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-min-admin",
+      "path": "/admin",
+      "viewport": {
+        "name": "mobile-min",
+        "width": 320,
+        "height": 568
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-home",
+      "path": "/",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-catalogue",
+      "path": "/catalogue",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-catalogue-type-RED",
+      "path": "/catalogue?type=RED",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-catalogue-mode-AUCTION",
+      "path": "/catalogue?mode=AUCTION",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-catalogue-certified-true",
+      "path": "/catalogue?certified=true",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-catalogue-region-bordeaux",
+      "path": "/catalogue?region=bordeaux",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-catalogue-maxPrice-100",
+      "path": "/catalogue?maxPrice=100",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-catalogue-q-hennessy",
+      "path": "/catalogue?q=hennessy",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-catalogue-q-aucun-resultat-probable",
+      "path": "/catalogue?q=aucun-resultat-probable",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-annonces-9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "path": "/annonces/9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-annonces-6129cefb-140a-4358-80c0-687e30210c35",
+      "path": "/annonces/6129cefb-140a-4358-80c0-687e30210c35",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-restaurants",
+      "path": "/restaurants",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-restaurants-138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "path": "/restaurants/138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-encheres",
+      "path": "/encheres",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-vendre",
+      "path": "/vendre",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-connexion",
+      "path": "/connexion",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-espace",
+      "path": "/espace",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-mobile-landscape-admin",
+      "path": "/admin",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 932,
+        "height": 430
+      },
       "status": "ok"
     }
   ]

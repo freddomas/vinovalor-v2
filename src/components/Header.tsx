@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Gavel, Home, LogOut, MessageCircle, Search, UserRound, Wine } from "lucide-react";
+import { Gavel, Home, LogIn, LogOut, Search, UserRound, Wine } from "lucide-react";
 import type { Session } from "next-auth";
 
 const navItems = [
@@ -58,7 +58,7 @@ export function Header({ session }: { session: Session | null }) {
           <Gavel size={21} />
         </Link>
         <Link href="/espace" aria-label="Compte">
-          {session ? <UserRound size={21} /> : <MessageCircle size={21} />}
+          {session ? <UserRound size={21} /> : <LogIn size={21} />}
         </Link>
         {session ? (
           <form className="mobile-nav__form" action="/api/auth/logout" method="post">

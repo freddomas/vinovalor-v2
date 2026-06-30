@@ -86,7 +86,11 @@ export function SellForm() {
       <button className="button" type="submit" disabled={pending}>
         {pending ? "Validation..." : "Valider l'annonce"}
       </button>
-      {message ? <p className={`form-message${message.type === "error" ? " form-message--error" : ""}`}>{message.text}</p> : null}
+      {message ? (
+        <p className={`form-message${message.type === "error" ? " form-message--error" : ""}`} role={message.type === "error" ? "alert" : "status"}>
+          {message.text}
+        </p>
+      ) : null}
     </form>
   );
 }

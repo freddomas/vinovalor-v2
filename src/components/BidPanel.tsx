@@ -32,7 +32,11 @@ export function BidPanel({ auctionId, currentPrice }: { auctionId: string; curre
       <button className="button" type="submit" disabled={pending}>
         <Gavel size={17} aria-hidden="true" /> {pending ? "Vérification..." : "Enchérir"}
       </button>
-      {message ? <p className="form-message">{message}</p> : null}
+      {message ? (
+        <p className="form-message" role="status">
+          {message}
+        </p>
+      ) : null}
     </form>
   );
 }

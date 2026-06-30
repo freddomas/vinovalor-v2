@@ -8,10 +8,10 @@ test("navigation principale et catalogue", async ({ page }) => {
     ? desktopNav.getByRole("link", { name: "Acheter" })
     : page.locator(".topbar__actions").getByRole("link", { name: /Rechercher/i });
   await Promise.all([page.waitForURL(/\/catalogue/), navigationTarget.click()]);
-  await expect(page.getByRole("heading", { name: /bouteilles et spiritueux/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /lots verifies/i })).toBeVisible();
   await page.getByLabel("Type").selectOption("RED");
   await page.getByRole("button", { name: /filtrer/i }).click();
-  await expect(page.getByRole("heading", { name: /17 bouteilles/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /17 lots verifies/i })).toBeVisible();
   await expect(page.getByRole("article").filter({ hasText: "Rouge" }).first()).toBeVisible();
 });
 

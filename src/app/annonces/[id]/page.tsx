@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BadgeCheck, Heart, MessageCircle, ShieldCheck, Truck } from "lucide-react";
+import { BadgeCheck, CheckCircle2, Heart, MessageCircle, ShieldCheck, Truck } from "lucide-react";
 import { BidPanel } from "@/components/BidPanel";
 import { alcoholWarning, formatCurrency, formatQuantity, getListingById } from "@/lib/domain";
 
@@ -18,12 +18,25 @@ export default async function ListingDetailPage({ params }: { params: Promise<{ 
   const listing = getListingById(id);
   if (!listing) notFound();
 
+  const proofItems = [
+    { label: "Photo principale", ok: listing.photos.length > 0 },
+    { label: "Appellation renseignee", ok: Boolean(listing.appellation) },
+    { label: "Vendeur certifie", ok: listing.seller.isCertified },
+    { label: "Conservation documentee", ok: Boolean(listing.storageConditions) },
+    { label: "Cave restaurant associee", ok: Boolean(listing.restaurant) }
+  ];
+
   return (
     <section className="section">
-      <div className="detail-layout">
+      <div className="detail-layout detail-layout--premium">
         <div className="detail-media">
           <div className="detail-media__main">
             <Image src={listing.image} alt={listing.wineName} width={900} height={820} priority />
+          </div>
+          <div className="detail-proof-strip">
+            <span>Score {listing.trustScore}/100</span>
+            <span>Preuve {listing.proofLevel.toLowerCase()}</span>
+            <span>{listing.saleMode === "AUCTION" ? "Enchere" : "Prix fixe"}</span>
           </div>
         </div>
         <div className="detail-summary panel">
@@ -32,7 +45,7 @@ export default async function ListingDetailPage({ params }: { params: Promise<{ 
             <span className="badge badge--green">{listing.conditionLabel}</span>
             {listing.seller.isCertified ? (
               <span className="badge badge--green">
-                <BadgeCheck size={14} aria-hidden="true" /> Vendeur certifié
+                <BadgeCheck size={14} aria-hidden="true" /> Vendeur certifie
               </span>
             ) : null}
           </div>
@@ -41,30 +54,25 @@ export default async function ListingDetailPage({ params }: { params: Promise<{ 
             {listing.vintage ? `${listing.vintage} · ` : ""}
             {listing.appellation ?? listing.regionLabel} · {listing.volume} cl · {formatQuantity(listing.quantity)}
           </p>
-          <span className="price">{formatCurrency(listing.price)}</span>
-          <div className="detail-facts">
-            <div className="fact">
-              <span>Score de confiance</span>
+          <div className="decision-panel">
+            <div>
+              <span>Prix affiche</span>
+              <strong>{formatCurrency(listing.price)}</strong>
+            </div>
+            <div>
+              <span>Confiance</span>
               <strong>{listing.trustScore}/100</strong>
             </div>
-            <div className="fact">
-              <span>Niveau de preuve</span>
+            <div>
+              <span>Preuve</span>
               <strong>{listing.proofLevel}</strong>
             </div>
-            <div className="fact">
-              <span>Vendeur</span>
-              <strong>
-                <Link href={`/vendeurs/${listing.sellerId}`}>
-                  {listing.seller.firstName.trim()} {listing.seller.lastName.trim()}
-                </Link>
-              </strong>
-            </div>
-            <div className="fact">
-              <span>Mode</span>
-              <strong>{listing.saleMode === "AUCTION" ? "Enchère" : "Prix fixe"}</strong>
+            <div>
+              <span>Disponibilite</span>
+              <strong>{formatQuantity(listing.quantity)}</strong>
             </div>
           </div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 22 }}>
+          <div className="detail-actions">
             <Link className="button" href="/connexion">
               Acheter
             </Link>
@@ -80,31 +88,68 @@ export default async function ListingDetailPage({ params }: { params: Promise<{ 
               <MessageCircle size={17} aria-hidden="true" /> Contacter
             </Link>
           </div>
-          {listing.saleMode === "AUCTION" ? <div style={{ marginTop: 18 }}><BidPanel auctionId={listing.id} currentPrice={Number(listing.price)} /></div> : null}
+          {listing.saleMode === "AUCTION" ? (
+            <div className="bid-panel-wrap">
+              <BidPanel auctionId={listing.id} currentPrice={Number(listing.price)} />
+            </div>
+          ) : null}
         </div>
       </div>
 
-      <div className="page-section">
-        <div className="proof-grid">
-          <div className="panel">
-            <ShieldCheck aria-hidden="true" />
-            <h3>Preuves attendues</h3>
-            <p>Face bouteille, étiquette, contre-étiquette, capsule, niveau et défauts visibles avant publication finale.</p>
+      <div className="page-section detail-grid">
+        <div className="panel panel--feature">
+          <h2>Profil produit</h2>
+          <div className="detail-facts">
+            <div className="fact">
+              <span>Region</span>
+              <strong>{listing.regionLabel}</strong>
+            </div>
+            <div className="fact">
+              <span>Cepage</span>
+              <strong>{listing.grapeVariety ?? "Non renseigne"}</strong>
+            </div>
+            <div className="fact">
+              <span>Caisse bois</span>
+              <strong>{listing.hasWoodCase ? "Oui" : "Non"}</strong>
+            </div>
+            <div className="fact">
+              <span>Bio</span>
+              <strong>{listing.isOrganic ? "Oui" : "Non"}</strong>
+            </div>
           </div>
-          <div className="panel">
-            <Truck aria-hidden="true" />
-            <h3>Livraison</h3>
-            <p>
-              {listing.deliveryStandard ? "Livraison standard disponible. " : ""}
-              {listing.deliveryPickup ? "Retrait disponible. " : ""}
-              Les frais et restrictions alcool doivent être validés au paiement.
-            </p>
-          </div>
-          <div className="panel">
-            <h3>Conformité</h3>
-            <p>{alcoholWarning}</p>
-          </div>
+          {listing.tastingNotes ? <p className="section__text">{listing.tastingNotes}</p> : null}
         </div>
+
+        <div className="panel panel--feature">
+          <ShieldCheck aria-hidden="true" />
+          <h2>Checklist de preuve</h2>
+          <ul className="proof-list">
+            {proofItems.map((item) => (
+              <li key={item.label} className={item.ok ? "is-ok" : ""}>
+                <CheckCircle2 size={17} aria-hidden="true" />
+                {item.label}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="panel panel--feature">
+          <Truck aria-hidden="true" />
+          <h2>Livraison et conformite</h2>
+          <p>
+            {listing.deliveryStandard ? "Livraison standard disponible. " : ""}
+            {listing.deliveryPickup ? "Retrait disponible. " : ""}
+            Les frais, l'age legal et les restrictions alcool doivent etre valides au paiement.
+          </p>
+          <p>{alcoholWarning}</p>
+        </div>
+      </div>
+
+      <div className="sticky-purchase" aria-label="Actions d'achat">
+        <span>{formatCurrency(listing.price)}</span>
+        <Link className="button" href="/connexion">
+          Acheter
+        </Link>
       </div>
     </section>
   );

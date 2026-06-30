@@ -44,7 +44,7 @@ export function AuthForm({ authEnabled, googleEnabled }: { authEnabled: boolean;
       <form className="form-grid" method="post" action="/api/auth/login" onSubmit={submit}>
         <div className="form-field" style={{ gridColumn: "1 / -1" }}>
           <label htmlFor="email">Email</label>
-          <input id="email" name="email" type="email" autoComplete="email" required placeholder="admin@vinovalor.local" />
+          <input id="email" name="email" type="email" autoComplete="email" required placeholder="vous@exemple.com" />
         </div>
         <div className="form-field" style={{ gridColumn: "1 / -1" }}>
           <label htmlFor="password">Mot de passe</label>
@@ -55,11 +55,11 @@ export function AuthForm({ authEnabled, googleEnabled }: { authEnabled: boolean;
         </button>
       </form>
       {!authEnabled ? (
-        <p className="form-message form-message--error">
+        <p className="form-message form-message--error" role="alert">
           Authentification non configuree sur ce deploiement. Ajouter NEXTAUTH_SECRET ou AUTH_SECRET dans Vercel.
         </p>
       ) : null}
-      {message ? <p className="form-message form-message--error">{message}</p> : null}
+      {message ? <p className="form-message form-message--error" role="alert">{message}</p> : null}
       <hr style={{ margin: "24px 0", border: 0, borderTop: "1px solid var(--border)" }} />
       <button
         className="button button--ghost"
