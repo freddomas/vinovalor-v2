@@ -1,0 +1,43 @@
+{
+  "listings_count": 41,
+  "restaurants_count": 6,
+  "users_count": 15,
+  "certified_users_count": 6,
+  "sale_modes": {
+    "FIXED": 37,
+    "AUCTION": 4
+  },
+  "wine_types": {
+    "RED": 17,
+    "COGNAC": 3,
+    "SPARKLING": 4,
+    "WHITE": 9,
+    "WHISKY": 4,
+    "SAKE": 2,
+    "ROSE": 2
+  },
+  "top_regions": {
+    "bordeaux": 9,
+    "bourgogne": 6,
+    "rhone": 5,
+    "japan": 4,
+    "sud-ouest": 3,
+    "champagne": 3,
+    "loire": 3,
+    "scotland": 2,
+    "provence": 2,
+    "alsace": 2
+  },
+  "min_price": 14.0,
+  "max_price": 15000.0,
+  "average_price": 876.34,
+  "listings_with_restaurant": 13,
+  "listings_with_photos": 40,
+  "auction_listings": 4,
+  "fixed_price_listings": 37,
+  "visual_urls_unique": 21,
+  "visuals_downloaded": 20,
+  "visuals_enhanced": 20,
+  "oauth_google_redirect_verified": true,
+  "knowledge_sqlite": "artifacts\\knowledge_base\\vinovalor_knowledge.sqlite"
+}

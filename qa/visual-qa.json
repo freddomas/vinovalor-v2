@@ -1,0 +1,93 @@
+{
+  "status": "ok",
+  "generatedAt": "2026-06-30T09:52:07.366Z",
+  "baseURL": "http://127.0.0.1:3100",
+  "checks": [
+    {
+      "name": "desktop-1440x900",
+      "path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "laptop-1366x768",
+      "path": "/",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "tablet-1024x768",
+      "path": "/catalogue",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "status": "ok"
+    },
+    {
+      "name": "mobile-430x932",
+      "path": "/catalogue",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "status": "ok"
+    },
+    {
+      "name": "mobile-390x844",
+      "path": "/annonces/9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": "ok"
+    },
+    {
+      "name": "sell-desktop",
+      "path": "/vendre",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "auctions-desktop",
+      "path": "/encheres",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "restaurants-desktop",
+      "path": "/restaurants",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "login-desktop",
+      "path": "/connexion",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "navigation-catalogue-filtre",
+      "path": "/catalogue?type=RED",
+      "status": "ok"
+    }
+  ]
+}

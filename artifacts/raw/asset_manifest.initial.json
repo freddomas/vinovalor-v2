@@ -1,0 +1,122 @@
+﻿[
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/chunks/035e4cf0e21c74c7.js",
+        "local":  ".\\artifacts\\assets\\__next_static_chunks_035e4cf0e21c74c7.js",
+        "bytes":  111369,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/chunks/30e6c11b80ee9b7a.js",
+        "local":  ".\\artifacts\\assets\\__next_static_chunks_30e6c11b80ee9b7a.js",
+        "bytes":  19442,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/chunks/58ffbddbb4c1d8dd.js",
+        "local":  ".\\artifacts\\assets\\__next_static_chunks_58ffbddbb4c1d8dd.js",
+        "bytes":  54427,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/chunks/a6dad97d9634a72d.js",
+        "local":  ".\\artifacts\\assets\\__next_static_chunks_a6dad97d9634a72d.js",
+        "bytes":  112594,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/chunks/ad13867f12c6448c.css",
+        "local":  ".\\artifacts\\assets\\__next_static_chunks_ad13867f12c6448c.css",
+        "bytes":  64558,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/chunks/aee6c7720838f8a2.js",
+        "local":  ".\\artifacts\\assets\\__next_static_chunks_aee6c7720838f8a2.js",
+        "bytes":  224413,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/chunks/c72ff4556f8d80d0.js",
+        "local":  ".\\artifacts\\assets\\__next_static_chunks_c72ff4556f8d80d0.js",
+        "bytes":  33299,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/chunks/c8ed93119ba3d801.js",
+        "local":  ".\\artifacts\\assets\\__next_static_chunks_c8ed93119ba3d801.js",
+        "bytes":  5385,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/chunks/cac5d456dc7f52db.js",
+        "local":  ".\\artifacts\\assets\\__next_static_chunks_cac5d456dc7f52db.js",
+        "bytes":  1570,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/chunks/d2be314c3ece3fbe.js",
+        "local":  ".\\artifacts\\assets\\__next_static_chunks_d2be314c3ece3fbe.js",
+        "bytes":  30681,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/chunks/d54799806b9979c8.js",
+        "local":  ".\\artifacts\\assets\\__next_static_chunks_d54799806b9979c8.js",
+        "bytes":  29406,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/chunks/e751cdb9cf6aa7ca.js",
+        "local":  ".\\artifacts\\assets\\__next_static_chunks_e751cdb9cf6aa7ca.js",
+        "bytes":  3913,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/chunks/ff1a16fafef87110.js",
+        "local":  ".\\artifacts\\assets\\__next_static_chunks_ff1a16fafef87110.js",
+        "bytes":  282,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/chunks/turbopack-403b30146f48ca61.js",
+        "local":  ".\\artifacts\\assets\\__next_static_chunks_turbopack-403b30146f48ca61.js",
+        "bytes":  10707,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/media/2a65768255d6b625-s.p.d19752fb.woff2",
+        "local":  ".\\artifacts\\assets\\__next_static_media_2a65768255d6b625-s.p.d19752fb.woff2",
+        "bytes":  38460,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/media/70e3db2de7f94926-s.p.347f98aa.woff2",
+        "local":  ".\\artifacts\\assets\\__next_static_media_70e3db2de7f94926-s.p.347f98aa.woff2",
+        "bytes":  38888,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/media/797e433ab948586e-s.p.29207c2f.woff2",
+        "local":  ".\\artifacts\\assets\\__next_static_media_797e433ab948586e-s.p.29207c2f.woff2",
+        "bytes":  23108,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/_next/static/media/caa3a2e1cccd8315-s.p.3b6cae6d.woff2",
+        "local":  ".\\artifacts\\assets\\__next_static_media_caa3a2e1cccd8315-s.p.3b6cae6d.woff2",
+        "bytes":  29288,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/favicon.ico?favicon.0b3bf435.ico",
+        "local":  ".\\artifacts\\assets\\_favicon.ico_favicon.0b3bf435.ico",
+        "bytes":  25931,
+        "status":  "ok"
+    },
+    {
+        "url":  "https://vinovalor.vercel.app/favicon.svg",
+        "local":  ".\\artifacts\\assets\\_favicon.svg",
+        "bytes":  267,
+        "status":  "ok"
+    }
+]

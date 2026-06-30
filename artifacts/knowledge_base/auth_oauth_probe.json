@@ -1,0 +1,7 @@
+{
+  "endpoint": "/api/auth/oauth/google",
+  "status_code": 307,
+  "location": "https://accounts.google.com/o/oauth2/v2/auth?client_id=10579952206-vbq4m1h5ubbodn0oehduqmsvctop6utf.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fvinovalor.vercel.app%2Fapi%2Fauth%2Foauth%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&access_type=online&prompt=select_account&state=78d20c457224683183862afae48db6c292d469c80864af01",
+  "set_cookie_present": true,
+  "verified": true
+}

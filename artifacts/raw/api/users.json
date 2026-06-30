@@ -1,0 +1,137 @@
+{
+  "users": [
+    {
+      "id": "de1caf78-b98f-403b-9470-123b6371f782",
+      "firstName": "Germe ",
+      "lastName": "Bosolo ",
+      "isCertified": false,
+      "createdAt": "2026-06-19T16:17:26.024Z",
+      "listingCount": 1
+    },
+    {
+      "id": "ddee7fd6-253c-499e-aabc-61520140263b",
+      "firstName": "Siwar",
+      "lastName": "Madrane",
+      "avatarUrl": "https://lh3.googleusercontent.com/a/ACg8ocJTTc5f9l7V3Lv8OjLMrSQj8V1ks_3B3DpEivaNEykD_al8Dx-K=s96-c",
+      "isCertified": false,
+      "createdAt": "2026-06-18T21:20:50.006Z",
+      "listingCount": 0
+    },
+    {
+      "id": "fce77d0e-9c03-47f0-8b21-7819e796e43c",
+      "firstName": "Claire",
+      "lastName": "Faure",
+      "isCertified": false,
+      "createdAt": "2026-06-18T20:24:22.212Z",
+      "listingCount": 0
+    },
+    {
+      "id": "7bbe8017-30bd-42b4-8ddb-41e202ca8859",
+      "firstName": "Marc",
+      "lastName": "Petit",
+      "isCertified": false,
+      "createdAt": "2026-06-18T20:24:22.186Z",
+      "listingCount": 2
+    },
+    {
+      "id": "ff8d9819-fc0e-42bf-8d24-892e45987e24",
+      "firstName": "Alice",
+      "lastName": "Duval",
+      "isCertified": false,
+      "createdAt": "2026-06-18T20:24:22.162Z",
+      "listingCount": 0
+    },
+    {
+      "id": "57e0744f-068f-475c-8871-4b0fa3123932",
+      "firstName": "Catherine",
+      "lastName": "Blanc",
+      "bio": "Negociante en vins fins, specialiste des millesimes anciens de Bourgogne.",
+      "isCertified": true,
+      "createdAt": "2026-06-18T20:24:22.137Z",
+      "listingCount": 5
+    },
+    {
+      "id": "de74e322-8856-4ec0-862c-36aa57393bdf",
+      "firstName": "Thomas",
+      "lastName": "Girard",
+      "bio": "Passionne de vins du Rhone et du Languedoc. Prix raisonnables garantis.",
+      "isCertified": false,
+      "createdAt": "2026-06-18T20:24:22.112Z",
+      "listingCount": 6
+    },
+    {
+      "id": "8dc72e3c-bfba-412e-8795-6f75c8edba46",
+      "firstName": "Isabelle",
+      "lastName": "Roux",
+      "bio": "Ancienne restauratrice, je vends ma cave personnelle constituee au fil des annees.",
+      "isCertified": true,
+      "createdAt": "2026-06-18T20:24:22.088Z",
+      "listingCount": 5
+    },
+    {
+      "id": "a74b5a6d-77dc-40db-8a0c-cbff34b6f9c9",
+      "firstName": "Luc",
+      "lastName": "Moreau",
+      "bio": "Collectionneur de grands crus classes depuis 15 ans.",
+      "isCertified": false,
+      "createdAt": "2026-06-18T20:24:22.064Z",
+      "listingCount": 4
+    },
+    {
+      "id": "b9f52fd9-d288-4890-87d0-f12ff27ef8a2",
+      "firstName": "Sophie",
+      "lastName": "Bernard",
+      "bio": "Sommeliere diplomee, selections pointues de vins naturels et biodynamiques.",
+      "isCertified": true,
+      "createdAt": "2026-06-18T20:24:22.040Z",
+      "listingCount": 5
+    },
+    {
+      "id": "d8437526-100f-4b55-8a89-5b75459d08ff",
+      "firstName": "Pierre",
+      "lastName": "Leroy",
+      "bio": "Amateur de grands vins, je me separe de quelques pepites de ma collection.",
+      "isCertified": true,
+      "createdAt": "2026-06-18T20:24:22.016Z",
+      "listingCount": 3
+    },
+    {
+      "id": "55e8b60d-f404-44e1-80a5-b2ff9b7617e0",
+      "firstName": "Marie",
+      "lastName": "Martin",
+      "bio": "Vigneronne amateur, je vends les excedents de ma cave.",
+      "isCertified": false,
+      "createdAt": "2026-06-18T20:24:21.991Z",
+      "listingCount": 2
+    },
+    {
+      "id": "62ef2a70-f352-4df7-862f-9c5c0db01752",
+      "firstName": "Jean",
+      "lastName": "Dupont",
+      "bio": "Passionne de vins depuis 20 ans. Cave personnelle de plus de 500 bouteilles.",
+      "isCertified": true,
+      "createdAt": "2026-06-18T20:24:21.967Z",
+      "listingCount": 4
+    },
+    {
+      "id": "4135e2e4-7904-446b-8410-65369907abab",
+      "firstName": "Test",
+      "lastName": "Buyer",
+      "isCertified": false,
+      "createdAt": "2026-06-18T20:24:21.921Z",
+      "listingCount": 1
+    },
+    {
+      "id": "d4127285-d2b1-47c4-8627-5c74f8a92186",
+      "firstName": "Test",
+      "lastName": "Seller",
+      "bio": "Compte de test vendeur.",
+      "isCertified": true,
+      "createdAt": "2026-06-18T20:24:21.871Z",
+      "listingCount": 3
+    }
+  ],
+  "total": 15,
+  "page": 1,
+  "totalPages": 1
+}

@@ -1,0 +1,187 @@
+// Schema cible pour la persistence production Vinovalor.
+// Le runtime actuel utilise les donnees capturees comme seed local.
+// Pour production: brancher DATABASE_URL Postgres, ajouter Prisma CLI, migrer, puis remplacer le repository seed.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  buyer
+  seller
+  certified_seller
+  restaurant_owner
+  restaurant_staff
+  moderator
+  admin
+  support
+}
+
+enum SaleMode {
+  FIXED
+  AUCTION
+}
+
+enum ListingStatus {
+  DRAFT
+  ACTIVE
+  RESERVED
+  SOLD
+  SUSPENDED
+}
+
+model User {
+  id          String   @id @default(uuid()) @db.Uuid
+  email       String   @unique
+  firstName   String
+  lastName    String
+  role        Role     @default(buyer)
+  isCertified Boolean  @default(false)
+  isBanned    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  authIdentities AuthIdentity[]
+  listings       Listing[]       @relation("sellerListings")
+  restaurants    Restaurant[]    @relation("restaurantOwner")
+  auditEvents    AuditLog[]
+}
+
+model AuthIdentity {
+  id              String  @id @default(uuid()) @db.Uuid
+  userId          String  @db.Uuid
+  provider        String
+  providerSubject String?
+  emailVerified   Boolean @default(false)
+  passwordHash    String?
+  user            User    @relation(fields: [userId], references: [id])
+
+  @@unique([provider, providerSubject])
+}
+
+model Restaurant {
+  id          String   @id @default(uuid()) @db.Uuid
+  ownerId     String   @db.Uuid
+  name        String
+  description String
+  street      String
+  city        String
+  country     String   @db.Char(2)
+  phone       String?
+  photoUrl    String?
+  rating      Decimal? @db.Decimal(3, 2)
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  owner    User      @relation("restaurantOwner", fields: [ownerId], references: [id])
+  listings Listing[]
+}
+
+model Listing {
+  id                String        @id @default(uuid()) @db.Uuid
+  sellerId          String        @db.Uuid
+  restaurantId      String?       @db.Uuid
+  wineName          String
+  wineType          String
+  vintage           Int?
+  appellation       String?
+  region            String?
+  grapeVariety      String?
+  volumeCl          Int           @default(75)
+  priceCents        Int
+  quantity          Int
+  conditionStatus   String
+  saleMode          SaleMode
+  allowOffers       Boolean       @default(true)
+  status            ListingStatus @default(DRAFT)
+  reservePriceCents Int?
+  targetPriceCents  Int?
+  evinMessage       String
+  isBoosted         Boolean       @default(false)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  seller     User             @relation("sellerListings", fields: [sellerId], references: [id])
+  restaurant Restaurant?      @relation(fields: [restaurantId], references: [id])
+  photos     ListingPhoto[]
+  offers     Offer[]
+  auction    Auction?
+  documents  ListingDocument[]
+
+  @@index([status, saleMode])
+  @@index([wineType, region])
+}
+
+model ListingPhoto {
+  id               String  @id @default(uuid()) @db.Uuid
+  listingId        String  @db.Uuid
+  url              String
+  position         Int     @default(0)
+  moderationStatus String  @default("pending")
+  listing          Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@unique([listingId, position])
+}
+
+model ListingDocument {
+  id               String  @id @default(uuid()) @db.Uuid
+  listingId        String  @db.Uuid
+  kind             String
+  url              String
+  moderationStatus String  @default("pending")
+  listing          Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+}
+
+model Offer {
+  id          String   @id @default(uuid()) @db.Uuid
+  listingId   String   @db.Uuid
+  buyerId     String   @db.Uuid
+  sellerId    String   @db.Uuid
+  amountCents Int
+  status      String   @default("pending")
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+  listing     Listing  @relation(fields: [listingId], references: [id])
+
+  @@index([listingId, status])
+}
+
+model Auction {
+  id                String   @id @default(uuid()) @db.Uuid
+  listingId         String   @unique @db.Uuid
+  reservePriceCents Int?
+  targetPriceCents  Int?
+  startsAt          DateTime @default(now())
+  endsAt            DateTime
+  status            String   @default("active")
+  listing           Listing  @relation(fields: [listingId], references: [id])
+  bids              Bid[]
+}
+
+model Bid {
+  id          String   @id @default(uuid()) @db.Uuid
+  auctionId   String   @db.Uuid
+  bidderId    String   @db.Uuid
+  amountCents Int
+  createdAt   DateTime @default(now())
+  auction     Auction  @relation(fields: [auctionId], references: [id])
+
+  @@index([auctionId, amountCents])
+}
+
+model AuditLog {
+  id         String   @id @default(uuid()) @db.Uuid
+  actorId    String?  @db.Uuid
+  action     String
+  targetType String
+  targetId   String
+  metadata   Json
+  createdAt  DateTime @default(now())
+  actor      User?    @relation(fields: [actorId], references: [id])
+}
