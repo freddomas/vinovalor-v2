@@ -1,10 +1,9 @@
-import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { authOptions } from "@/lib/auth";
 import { can, getListingById, toCents } from "@/lib/domain";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { hashIp, securityHeaders } from "@/lib/security";
+import { getVinovalorSession } from "@/lib/session";
 
 const offerSchema = z.object({
   listingId: z.string().uuid(),
@@ -13,7 +12,7 @@ const offerSchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
-  const session = await getServerSession(authOptions);
+  const session = await getVinovalorSession();
   const role = session?.user?.role ?? "guest";
   if (!session?.user || !can(role, "buy")) {
     return NextResponse.json({ message: "Vous devez etre connecte pour faire une offre." }, { status: 401, headers: securityHeaders() });

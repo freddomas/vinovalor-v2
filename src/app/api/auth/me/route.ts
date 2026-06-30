@@ -1,10 +1,9 @@
-import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { authOptions } from "@/lib/auth";
 import { securityHeaders } from "@/lib/security";
+import { getVinovalorSession } from "@/lib/session";
 
 export async function GET() {
-  const session = await getServerSession(authOptions);
+  const session = await getVinovalorSession();
   if (!session?.user) {
     return NextResponse.json({ authenticated: false }, { status: 401, headers: securityHeaders() });
   }

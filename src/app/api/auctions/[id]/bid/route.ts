@@ -1,17 +1,16 @@
-import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { authOptions } from "@/lib/auth";
 import { getListingById, toCents, validateBid } from "@/lib/domain";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { hashIp, securityHeaders } from "@/lib/security";
+import { getVinovalorSession } from "@/lib/session";
 
 const bidSchema = z.object({
   amount: z.coerce.number().positive()
 });
 
 export async function POST(request: NextRequest, context: { params: Promise<{ id: string }> }) {
-  const session = await getServerSession(authOptions);
+  const session = await getVinovalorSession();
   if (!session?.user) {
     return NextResponse.json({ message: "Connexion requise pour encherir." }, { status: 401, headers: securityHeaders() });
   }

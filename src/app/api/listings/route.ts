@@ -1,10 +1,9 @@
-import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { assertListingCanBePublished, can, getListings } from "@/lib/domain";
-import { authOptions } from "@/lib/auth";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { hashIp, securityHeaders } from "@/lib/security";
+import { getVinovalorSession } from "@/lib/session";
 
 const createListingSchema = z.object({
   wineName: z.string().min(2).max(160),
@@ -33,7 +32,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const session = await getServerSession(authOptions);
+  const session = await getVinovalorSession();
   const role = session?.user?.role ?? "guest";
   if (!session?.user || !can(role, "sell")) {
     return NextResponse.json({ message: "Publication interdite pour ce compte." }, { status: 403, headers: securityHeaders() });

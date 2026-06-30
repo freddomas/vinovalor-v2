@@ -93,12 +93,16 @@ Captures dans `qa/screenshots/` :
 
 ## Déploiement Vercel
 
-1. Renseigner `NEXTAUTH_URL`, `NEXTAUTH_SECRET`, puis éventuellement `GOOGLE_CLIENT_ID` et `GOOGLE_CLIENT_SECRET`.
+1. Renseigner `NEXTAUTH_URL`, `NEXTAUTH_SECRET` ou `AUTH_SECRET`, puis éventuellement `GOOGLE_CLIENT_ID` et `GOOGLE_CLIENT_SECRET`. Sans secret d'auth, les pages publiques restent accessibles mais la session et les actions protégées restent désactivées.
 2. Brancher Postgres avant toute transaction réelle.
 3. Remplacer le repository seed par le repository DB.
 4. Exécuter `npm run build`.
 5. Déployer sur Vercel.
 
+## Incident Vercel corrigé
+
+Le déploiement `vinovalor-v2.vercel.app` a retourné une erreur serveur 500 au chargement public. Correctif appliqué : la lecture de session passe par `src/lib/session.ts`, qui échoue proprement en utilisateur non connecté si le secret NextAuth manque ou si NextAuth lève une exception. Les endpoints protégés retournent alors `401/403` au lieu de faire tomber la page publique.
+
 ## Git
 
-Le répertoire contient `.git`, mais `git status` a renvoyé `fatal: not a git repository`. Il faut réparer ou réinitialiser le dépôt local avant push vers `https://github.com/freddomas/vinovalor-v2.git`.
+Le dépôt local a été réinitialisé proprement et poussé vers `https://github.com/freddomas/vinovalor-v2.git` sur la branche `main`.

@@ -1,14 +1,13 @@
 import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
 import { getDashboardMetrics, getListings, users } from "@/lib/domain";
+import { getVinovalorSession } from "@/lib/session";
 
 export const metadata = {
   title: "Administration"
 };
 
 export default async function AdminPage() {
-  const session = await getServerSession(authOptions);
+  const session = await getVinovalorSession();
   if (!session?.user) {
     return (
       <section className="section">

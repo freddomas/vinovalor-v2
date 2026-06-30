@@ -33,6 +33,12 @@ seededAccounts.push({
 
 export const demoAccounts = seededAccounts.map(({ passwordHash: _passwordHash, ...account }) => account);
 
+const authSecret = process.env.NEXTAUTH_SECRET ?? process.env.AUTH_SECRET;
+
+export function hasAuthSecret(): boolean {
+  return Boolean(authSecret);
+}
+
 const providers: NextAuthOptions["providers"] = [
   CredentialsProvider({
     name: "Compte local",
@@ -103,7 +109,7 @@ export const authOptions: NextAuthOptions = {
       }
     }
   },
-  secret: process.env.NEXTAUTH_SECRET
+  secret: authSecret
 };
 
 export function isGoogleAuthConfigured(): boolean {

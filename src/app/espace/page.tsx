@@ -1,15 +1,14 @@
 import Link from "next/link";
-import { getServerSession } from "next-auth";
 import { BadgeCheck, Gavel, PackageCheck, ShieldCheck } from "lucide-react";
-import { authOptions } from "@/lib/auth";
 import { getAuctions, getDashboardMetrics, getListings, roleLabels } from "@/lib/domain";
+import { getVinovalorSession } from "@/lib/session";
 
 export const metadata = {
   title: "Espace"
 };
 
 export default async function AccountPage() {
-  const session = await getServerSession(authOptions);
+  const session = await getVinovalorSession();
   const metrics = getDashboardMetrics();
   const watchlist = getListings().slice(0, 4);
   const auctions = getAuctions().slice(0, 3);

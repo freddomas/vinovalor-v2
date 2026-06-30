@@ -1,15 +1,14 @@
 import Link from "next/link";
-import { getServerSession } from "next-auth";
 import { SellForm } from "@/components/SellForm";
-import { authOptions } from "@/lib/auth";
 import { can } from "@/lib/domain";
+import { getVinovalorSession } from "@/lib/session";
 
 export const metadata = {
   title: "Vendre"
 };
 
 export default async function SellPage() {
-  const session = await getServerSession(authOptions);
+  const session = await getVinovalorSession();
   const role = session?.user?.role ?? "guest";
   const allowed = can(role, "sell");
 
