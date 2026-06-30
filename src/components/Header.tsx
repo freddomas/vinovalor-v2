@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Gavel, Home, MessageCircle, Search, UserRound, Wine } from "lucide-react";
+import { Gavel, Home, LogOut, MessageCircle, Search, UserRound, Wine } from "lucide-react";
 import type { Session } from "next-auth";
 
 const navItems = [
@@ -30,10 +30,18 @@ export function Header({ session }: { session: Session | null }) {
             <Link className="button button--light" href="/catalogue">
               <Search size={17} aria-hidden="true" /> Rechercher
             </Link>
-            <Link className="button button--ghost" href={session ? "/espace" : "/connexion"}>
-              {session ? "Mon compte" : "Connexion"}
-            </Link>
-          </div>
+          <Link className="button button--ghost" href={session ? "/espace" : "/connexion"}>
+            {session ? "Mon compte" : "Connexion"}
+          </Link>
+          {session ? (
+            <form className="logout-form" action="/api/auth/logout" method="post">
+              <button className="button button--ghost" type="submit">
+                <LogOut size={17} aria-hidden="true" />
+                Déconnexion
+              </button>
+            </form>
+          ) : null}
+        </div>
         </div>
       </header>
       <nav className="mobile-nav" aria-label="Navigation mobile">
@@ -52,6 +60,13 @@ export function Header({ session }: { session: Session | null }) {
         <Link href="/espace" aria-label="Compte">
           {session ? <UserRound size={21} /> : <MessageCircle size={21} />}
         </Link>
+        {session ? (
+          <form className="mobile-nav__form" action="/api/auth/logout" method="post">
+            <button type="submit" aria-label="Déconnexion">
+              <LogOut size={21} />
+            </button>
+          </form>
+        ) : null}
       </nav>
     </>
   );

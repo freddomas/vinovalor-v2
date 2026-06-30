@@ -1,12 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
 import { LogIn } from "lucide-react";
 
 export function AuthForm({ authEnabled, googleEnabled }: { authEnabled: boolean; googleEnabled: boolean }) {
+  const [hydrated, setHydrated] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -36,7 +41,7 @@ export function AuthForm({ authEnabled, googleEnabled }: { authEnabled: boolean;
     <div className="auth-panel">
       <p className="eyebrow">Connexion sécurisée</p>
       <h2>Accéder à votre espace</h2>
-      <form className="form-grid" onSubmit={submit}>
+      <form className="form-grid" method="post" action="/api/auth/login" onSubmit={submit}>
         <div className="form-field" style={{ gridColumn: "1 / -1" }}>
           <label htmlFor="email">Email</label>
           <input id="email" name="email" type="email" autoComplete="email" required placeholder="admin@vinovalor.local" />
@@ -45,7 +50,7 @@ export function AuthForm({ authEnabled, googleEnabled }: { authEnabled: boolean;
           <label htmlFor="password">Mot de passe</label>
           <input id="password" name="password" type="password" autoComplete="current-password" required />
         </div>
-        <button className="button" type="submit" disabled={pending || !authEnabled} style={{ gridColumn: "1 / -1" }}>
+        <button className="button" type="submit" disabled={pending || !authEnabled || !hydrated} style={{ gridColumn: "1 / -1" }}>
           <LogIn size={17} aria-hidden="true" /> {pending ? "Connexion..." : "Se connecter"}
         </button>
       </form>
@@ -59,7 +64,7 @@ export function AuthForm({ authEnabled, googleEnabled }: { authEnabled: boolean;
       <button
         className="button button--ghost"
         type="button"
-        disabled={!googleEnabled || !authEnabled}
+        disabled={!googleEnabled || !authEnabled || !hydrated}
         onClick={() => signIn("google", { callbackUrl: "/espace" })}
         style={{ width: "100%" }}
       >
