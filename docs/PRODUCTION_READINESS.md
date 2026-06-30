@@ -9,6 +9,7 @@
 - Secrets externalisés.
 - Auth locale + Google OAuth configurables.
 - Pages publiques résistantes si `NEXTAUTH_SECRET` / `AUTH_SECRET` manque ; les actions protégées restent fermées.
+- Page `/connexion` et endpoints NextAuth protégés contre l'erreur brute de configuration : retour `503 AUTH_NOT_CONFIGURED` si le secret serveur manque.
 - API route handlers disponibles.
 
 ## Non prêt pour production transactionnelle

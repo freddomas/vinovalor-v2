@@ -1,5 +1,5 @@
 import { AuthForm } from "@/components/AuthForm";
-import { isGoogleAuthConfigured } from "@/lib/auth";
+import { hasAuthSecret, isGoogleAuthConfigured } from "@/lib/auth";
 
 export const metadata = {
   title: "Connexion"
@@ -18,7 +18,7 @@ export default function LoginPage() {
             </p>
           </div>
         </div>
-        <AuthForm googleEnabled={isGoogleAuthConfigured()} />
+          <AuthForm authEnabled={hasAuthSecret()} googleEnabled={isGoogleAuthConfigured()} />
       </div>
     </section>
   );

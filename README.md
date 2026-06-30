@@ -99,9 +99,20 @@ Captures dans `qa/screenshots/` :
 4. Exécuter `npm run build`.
 5. Déployer sur Vercel.
 
+Variables minimales pour tester le compte administrateur sur Vercel :
+
+```text
+NEXTAUTH_URL=https://vinovalor-v2.vercel.app
+NEXTAUTH_SECRET=<valeur aleatoire forte, 32 caracteres minimum>
+```
+
+Ne pas mettre cette valeur dans Git. Elle doit rester uniquement dans les variables d'environnement Vercel.
+
 ## Incident Vercel corrigé
 
 Le déploiement `vinovalor-v2.vercel.app` a retourné une erreur serveur 500 au chargement public. Correctif appliqué : la lecture de session passe par `src/lib/session.ts`, qui échoue proprement en utilisateur non connecté si le secret NextAuth manque ou si NextAuth lève une exception. Les endpoints protégés retournent alors `401/403` au lieu de faire tomber la page publique.
+
+Deuxième correctif appliqué : les endpoints NextAuth retournent maintenant `503 AUTH_NOT_CONFIGURED` si le secret d'auth manque, et la page `/connexion` affiche une erreur française exploitable au lieu de l'écran anglais générique `Server error`.
 
 ## Git
 
