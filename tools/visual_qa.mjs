@@ -50,6 +50,13 @@ async function capture(page, name, path, viewport) {
   await page.setViewportSize({ width: viewport.width, height: viewport.height });
   await page.goto(`${baseURL}${path}`, { waitUntil: "domcontentloaded" });
   await page.locator("body").waitFor({ state: "visible" });
+  await page.waitForFunction(() => {
+    const visibleImages = Array.from(document.images).filter((image) => {
+      const rect = image.getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
+    });
+    return visibleImages.every((image) => image.complete && image.naturalWidth > 0);
+  });
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   if (overflow > 3) {
     throw new Error(`${name}: overflow horizontal de ${overflow}px`);

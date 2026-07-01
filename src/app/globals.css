@@ -1024,16 +1024,20 @@ img {
 
 .restaurant-hero {
   display: grid;
-  grid-template-columns: minmax(0, 0.78fr) minmax(420px, 1fr);
-  gap: 34px;
+  grid-template-columns: minmax(0, 520px) minmax(0, 1fr);
+  gap: clamp(32px, 4vw, 56px);
   align-items: center;
+}
+
+.restaurant-hero__copy {
+  min-width: 0;
 }
 
 .restaurant-hero h1,
 .auction-hero h1 {
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(3rem, 6vw, 6.4rem);
+  font-size: clamp(3rem, 5vw, 5.2rem);
   line-height: 0.96;
 }
 
