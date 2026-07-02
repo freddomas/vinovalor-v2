@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BadgeCheck, CheckCircle2, Heart, MessageCircle, ShieldCheck, Truck } from "lucide-react";
+import { BadgeCheck, CalendarDays, CheckCircle2, Heart, LockKeyhole, MessageCircle, ShieldCheck, Truck, Utensils } from "lucide-react";
 import { BidPanel } from "@/components/BidPanel";
 import { alcoholWarning, formatCurrency, formatQuantity, getListingById } from "@/lib/domain";
 
@@ -17,13 +17,14 @@ export default async function ListingDetailPage({ params }: { params: Promise<{ 
   const { id } = await params;
   const listing = getListingById(id);
   if (!listing) notFound();
+  const nextUrl = encodeURIComponent(`/annonces/${listing.id}`);
 
   const proofItems = [
     { label: "Photo principale", ok: listing.photos.length > 0 },
-    { label: "Appellation renseignee", ok: Boolean(listing.appellation) },
-    { label: "Vendeur certifie", ok: listing.seller.isCertified },
-    { label: "Conservation documentee", ok: Boolean(listing.storageConditions) },
-    { label: "Cave restaurant associee", ok: Boolean(listing.restaurant) }
+    { label: "Appellation renseignée", ok: Boolean(listing.appellation) },
+    { label: "Vendeur certifié", ok: listing.seller.isCertified },
+    { label: "Conservation documentée", ok: Boolean(listing.storageConditions) },
+    { label: "Cave restaurant associée", ok: Boolean(listing.restaurant) }
   ];
 
   return (
@@ -36,7 +37,7 @@ export default async function ListingDetailPage({ params }: { params: Promise<{ 
           <div className="detail-proof-strip">
             <span>Score {listing.trustScore}/100</span>
             <span>Preuve {listing.proofLevel.toLowerCase()}</span>
-            <span>{listing.saleMode === "AUCTION" ? "Enchere" : "Prix fixe"}</span>
+            <span>{listing.saleMode === "AUCTION" ? "Enchère" : "Prix fixe"}</span>
           </div>
         </div>
         <div className="detail-summary panel">
@@ -45,7 +46,7 @@ export default async function ListingDetailPage({ params }: { params: Promise<{ 
             <span className="badge badge--green">{listing.conditionLabel}</span>
             {listing.seller.isCertified ? (
               <span className="badge badge--green">
-                <BadgeCheck size={14} aria-hidden="true" /> Vendeur certifie
+                <BadgeCheck size={14} aria-hidden="true" /> Vendeur certifié
               </span>
             ) : null}
           </div>
@@ -56,7 +57,7 @@ export default async function ListingDetailPage({ params }: { params: Promise<{ 
           </p>
           <div className="decision-panel">
             <div>
-              <span>Prix affiche</span>
+              <span>Prix affiché</span>
               <strong>{formatCurrency(listing.price)}</strong>
             </div>
             <div>
@@ -68,23 +69,53 @@ export default async function ListingDetailPage({ params }: { params: Promise<{ 
               <strong>{listing.proofLevel}</strong>
             </div>
             <div>
-              <span>Disponibilite</span>
+              <span>Disponibilité</span>
               <strong>{formatQuantity(listing.quantity)}</strong>
             </div>
           </div>
+          {listing.restaurant ? (
+            <div className="table-reservation-panel" aria-label="Préparation de réservation à table">
+              <Utensils aria-hidden="true" />
+            <div>
+              <strong>Cette bouteille peut guider une venue chez {listing.restaurant.name}.</strong>
+              <span>
+                La sélection bouteille + table + date reste en préparation : aucune garantie de réservation ou de
+                paiement n'est simulée ici.
+              </span>
+              <div className="reservation-form-preview" aria-label="Prévisualisation réservation">
+                <label>
+                  Date
+                  <input type="date" disabled aria-label="Date de venue non active en preview" />
+                </label>
+                <label>
+                  Heure
+                  <select disabled aria-label="Heure de venue non active en preview">
+                    <option>19:00</option>
+                  </select>
+                </label>
+                <label>
+                  Convives
+                  <select disabled aria-label="Nombre de convives non actif en preview">
+                    <option>2</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          </div>
+          ) : null}
           <div className="detail-actions">
-            <Link className="button" href="/connexion">
-              Acheter
+            <Link className="button" href={`/connexion?next=${nextUrl}`}>
+              {listing.restaurant ? "Préparer la réservation" : "Préparer l'achat"}
             </Link>
             {listing.allowOffers ? (
-              <Link className="button button--ghost" href="/connexion">
+              <Link className="button button--ghost" href={`/connexion?next=${nextUrl}`}>
                 Faire une offre
               </Link>
             ) : null}
-            <Link className="button button--ghost" href="/connexion" aria-label="Ajouter aux favoris">
+            <Link className="button button--ghost" href={`/connexion?next=${nextUrl}`} aria-label="Ajouter aux favoris">
               <Heart size={17} aria-hidden="true" /> Favori
             </Link>
-            <Link className="button button--ghost" href="/connexion">
+            <Link className="button button--ghost" href={`/connexion?next=${nextUrl}`}>
               <MessageCircle size={17} aria-hidden="true" /> Contacter
             </Link>
           </div>
@@ -101,12 +132,12 @@ export default async function ListingDetailPage({ params }: { params: Promise<{ 
           <h2>Profil produit</h2>
           <div className="detail-facts">
             <div className="fact">
-              <span>Region</span>
+              <span>Région</span>
               <strong>{listing.regionLabel}</strong>
             </div>
             <div className="fact">
-              <span>Cepage</span>
-              <strong>{listing.grapeVariety ?? "Non renseigne"}</strong>
+              <span>Cépage</span>
+              <strong>{listing.grapeVariety ?? "Non renseigné"}</strong>
             </div>
             <div className="fact">
               <span>Caisse bois</span>
@@ -135,20 +166,32 @@ export default async function ListingDetailPage({ params }: { params: Promise<{ 
 
         <div className="panel panel--feature">
           <Truck aria-hidden="true" />
-          <h2>Livraison et conformite</h2>
+          <h2>Livraison et conformité</h2>
           <p>
             {listing.deliveryStandard ? "Livraison standard disponible. " : ""}
             {listing.deliveryPickup ? "Retrait disponible. " : ""}
-            Les frais, l'age legal et les restrictions alcool doivent etre valides au paiement.
+            Les frais, l'âge légal et les restrictions alcool doivent être validés au paiement.
           </p>
           <p>{alcoholWarning}</p>
+        </div>
+        <div className="panel panel--feature">
+          <CalendarDays aria-hidden="true" />
+          <h2>Réservation</h2>
+          <p>
+            Le parcours cible associe bouteille, table, date, heure et convives. Cette version affiche le contexte, mais
+            n'enregistre pas encore de réservation durable.
+          </p>
+          <p>
+            <LockKeyhole size={15} aria-hidden="true" /> Paiement sécurisé et dépôt de garantie attendent le provider
+            compatible alcool.
+          </p>
         </div>
       </div>
 
       <div className="sticky-purchase" aria-label="Actions d'achat">
         <span>{formatCurrency(listing.price)}</span>
-        <Link className="button" href="/connexion">
-          Acheter
+        <Link className="button" href={`/connexion?next=${nextUrl}`}>
+          {listing.restaurant ? "Préparer" : "Acheter"}
         </Link>
       </div>
     </section>

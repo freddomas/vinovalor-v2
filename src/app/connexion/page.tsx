@@ -1,5 +1,5 @@
 import { AuthForm } from "@/components/AuthForm";
-import { hasAuthSecret, isGoogleAuthConfigured } from "@/lib/auth";
+import { hasAuthSecret, isGoogleAuthConfigured, isLocalCredentialsConfigured } from "@/lib/auth";
 
 export const metadata = {
   title: "Connexion"
@@ -7,7 +7,18 @@ export const metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default function LoginPage() {
+type SearchParams = Promise<Record<string, string | string[] | undefined>>;
+
+function safeNext(value: string | string[] | undefined): string {
+  const next = Array.isArray(value) ? value[0] : value;
+  if (!next || !next.startsWith("/") || next.startsWith("//")) return "/espace";
+  return next;
+}
+
+export default async function LoginPage({ searchParams }: { searchParams: SearchParams }) {
+  const params = await searchParams;
+  const callbackUrl = safeNext(params.next);
+
   return (
     <section className="section">
       <div className="auth-layout">
@@ -20,7 +31,12 @@ export default function LoginPage() {
             </p>
           </div>
         </div>
-          <AuthForm authEnabled={hasAuthSecret()} googleEnabled={isGoogleAuthConfigured()} />
+        <AuthForm
+          authEnabled={hasAuthSecret()}
+          googleEnabled={isGoogleAuthConfigured()}
+          localEnabled={isLocalCredentialsConfigured()}
+          callbackUrl={callbackUrl}
+        />
       </div>
     </section>
   );

@@ -58,22 +58,27 @@ Résultats :
 
 - TypeScript : OK.
 - ESLint : OK.
-- Unitaires Vitest : 9 tests OK.
-- Build Next production : OK, 20 routes générées.
+- Unitaires Vitest : 16 tests OK.
+- Build Next production : OK, 23 routes listées dont 19 pages statiques générées.
 - Audit high/critical : OK ; reste 2 vulnérabilités modérées liées à `next-auth` / `uuid`.
 - QA visuelle autonome : OK, voir `qa/visual-qa.json`.
 
-Note : le runner `playwright test` standard a exécuté les tests navigation avec succès dans les logs, mais ne s'est pas terminé proprement dans cet environnement après réutilisation du serveur dev. Le script `npm run qa:visual` a été ajouté pour fournir une preuve stable.
+Note : le runner `npm run qa:visual` est la preuve stable retenue. Il vérifie erreurs navigateur, HTTP inattendus, images cassées, texte suspect, overflow et contrôles interactifs recouverts.
 
 ## Captures QA
 
 Captures dans `qa/screenshots/` :
 
 - `desktop-1440x900.png`
+- `desktop-1920x1080.png`
 - `laptop-1366x768.png`
 - `tablet-1024x768.png`
+- `tablet-768x1024.png`
 - `mobile-430x932.png`
 - `mobile-390x844.png`
+- `mobile-360x800.png`
+- `mobile-320x568.png`
+- `mobile-landscape-932x430.png`
 - `sell-desktop.png`
 - `auctions-desktop.png`
 - `restaurants-desktop.png`

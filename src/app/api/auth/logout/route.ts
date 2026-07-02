@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { securityHeaders } from "@/lib/security";
+import { assertSameOrigin, forbidden, securityHeaders } from "@/lib/security";
 
 const logoutCookieNames = [
   "vinovalor.session-token",
@@ -37,10 +37,15 @@ function logoutResponse(request: NextRequest) {
   return response;
 }
 
-export async function GET(request: NextRequest) {
-  return logoutResponse(request);
+export async function GET() {
+  return NextResponse.json({ message: "Méthode non autorisée." }, { status: 405, headers: securityHeaders() });
 }
 
 export async function POST(request: NextRequest) {
+  try {
+    assertSameOrigin(request);
+  } catch {
+    return forbidden("Origine non autorisée.");
+  }
   return logoutResponse(request);
 }

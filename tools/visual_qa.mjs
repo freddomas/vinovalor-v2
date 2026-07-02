@@ -4,35 +4,39 @@ import { createWriteStream, mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const port = Number(process.env.QA_PORT ?? 3100);
-const baseURL = `http://127.0.0.1:${port}`;
+const externalBaseURL = process.env.QA_BASE_URL?.replace(/\/$/, "");
+const baseURL = externalBaseURL ?? `http://127.0.0.1:${port}`;
+const usesExternalBaseURL = Boolean(externalBaseURL);
 const screenshotsDir = resolve("qa/screenshots");
 mkdirSync(screenshotsDir, { recursive: true });
 
 const stdout = createWriteStream("qa/visual-server.stdout.log");
 const stderr = createWriteStream("qa/visual-server.stderr.log");
 
-const server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "-H", "127.0.0.1", "-p", String(port)], {
-  env: {
-    ...process.env,
-    NEXTAUTH_URL: baseURL,
-    NEXTAUTH_SECRET: "visual-qa-local-secret"
-  },
-  stdio: ["ignore", "pipe", "pipe"],
-  windowsHide: true
-});
+const server = usesExternalBaseURL
+  ? null
+  : spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "-H", "127.0.0.1", "-p", String(port)], {
+      env: {
+        ...process.env,
+        NEXTAUTH_URL: baseURL,
+        NEXTAUTH_SECRET: "visual-qa-local-secret"
+      },
+      stdio: ["ignore", "pipe", "pipe"],
+      windowsHide: true
+    });
 
-server.stdout.pipe(stdout);
-server.stderr.pipe(stderr);
+server?.stdout.pipe(stdout);
+server?.stderr.pipe(stderr);
 
 let serverExited = false;
-server.on("exit", () => {
+server?.on("exit", () => {
   serverExited = true;
 });
 
 async function waitForServer() {
   const startedAt = Date.now();
   while (Date.now() - startedAt < 60_000) {
-    if (serverExited) throw new Error("Le serveur Next s'est arrete avant la QA.");
+    if (!usesExternalBaseURL && serverExited) throw new Error("Le serveur Next s'est arrete avant la QA.");
     try {
       const response = await fetch(`${baseURL}/api/health`);
       if (response.ok) return;
@@ -45,6 +49,92 @@ async function waitForServer() {
 }
 
 const checks = [];
+const browserIssues = [];
+
+function isExpectedHttpError(response) {
+  const url = response.url();
+  const status = response.status();
+  return status === 401 && url.includes("/api/auth/callback/credentials");
+}
+
+function isExpectedRequestFailure(request) {
+  const url = request.url();
+  const failure = request.failure()?.errorText ?? "";
+  if (failure !== "net::ERR_ABORTED") return false;
+  return url.includes("_rsc=") || request.resourceType() === "image";
+}
+
+function installBrowserGuards(page) {
+  page.on("console", (message) => {
+    if (message.type() === "error") {
+      browserIssues.push({ type: "console.error", text: message.text() });
+    }
+  });
+  page.on("pageerror", (error) => {
+    browserIssues.push({ type: "pageerror", text: error.message });
+  });
+  page.on("requestfailed", (request) => {
+    if (isExpectedRequestFailure(request)) return;
+    browserIssues.push({ type: "requestfailed", url: request.url(), failure: request.failure()?.errorText ?? "unknown" });
+  });
+  page.on("response", (response) => {
+    if (response.status() >= 400 && !isExpectedHttpError(response)) {
+      browserIssues.push({ type: "http", status: response.status(), url: response.url() });
+    }
+  });
+}
+
+async function auditPage(page, name) {
+  const result = await page.evaluate(() => {
+    const badTextPatterns = [/�/, /Ã/, /Â/, /â€/, /\bundefined\b/i, /\bNaN\b/, /\[object Object\]/];
+    const bodyText = document.body.innerText;
+    const textIssue = badTextPatterns.find((pattern) => pattern.test(bodyText))?.source ?? null;
+    const overflow = document.documentElement.scrollWidth - document.documentElement.clientWidth;
+    const brokenImages = Array.from(document.images)
+      .filter((image) => image.complete && image.naturalWidth === 0)
+      .map((image) => image.getAttribute("src") ?? "");
+    const interactiveWithoutName = Array.from(document.querySelectorAll("a, button, input, select, textarea"))
+      .filter((element) => {
+        if (element instanceof HTMLElement && element.offsetParent === null) return false;
+        if ("labels" in element && element.labels?.length) return false;
+        const label = element.getAttribute("aria-label") || element.textContent || element.getAttribute("placeholder") || element.getAttribute("title");
+        return !String(label ?? "").trim();
+      }).length;
+    const occluded = Array.from(document.querySelectorAll("a, button, input, select, textarea"))
+      .filter((element) => {
+        if (!(element instanceof HTMLElement)) return false;
+        if (element instanceof HTMLSelectElement) return false;
+        const style = window.getComputedStyle(element);
+        if (style.visibility === "hidden" || style.display === "none" || element.offsetParent === null) return false;
+        const rect = element.getBoundingClientRect();
+        if (rect.width < 1 || rect.height < 1) return false;
+        if (rect.bottom <= 0 || rect.right <= 0 || rect.top >= window.innerHeight || rect.left >= window.innerWidth) return false;
+        const x = Math.min(Math.max(rect.left + rect.width / 2, 0), window.innerWidth - 1);
+        const y = Math.min(Math.max(rect.top + rect.height / 2, 0), window.innerHeight - 1);
+        const topElement = document.elementFromPoint(x, y);
+        return Boolean(topElement && topElement !== element && !element.contains(topElement) && !topElement.contains(element));
+      })
+      .slice(0, 3)
+      .map((element) => ({
+        tag: element.tagName,
+        text: (element.textContent ?? element.getAttribute("aria-label") ?? "").trim().slice(0, 80)
+      }));
+    return {
+      charset: document.characterSet,
+      textIssue,
+      overflow,
+      brokenImages,
+      interactiveWithoutName,
+      occluded
+    };
+  });
+  if (result.charset.toUpperCase() !== "UTF-8") throw new Error(`${name}: encodage ${result.charset}`);
+  if (result.textIssue) throw new Error(`${name}: texte rendu suspect (${result.textIssue})`);
+  if (result.overflow > 3) throw new Error(`${name}: overflow horizontal de ${result.overflow}px`);
+  if (result.brokenImages.length) throw new Error(`${name}: image cassée ${result.brokenImages[0]}`);
+  if (result.interactiveWithoutName) throw new Error(`${name}: ${result.interactiveWithoutName} contrôle(s) sans nom accessible`);
+  if (result.occluded.length) throw new Error(`${name}: élément interactif recouvert ${JSON.stringify(result.occluded[0])}`);
+}
 
 async function capture(page, name, path, viewport) {
   await page.setViewportSize({ width: viewport.width, height: viewport.height });
@@ -57,10 +147,7 @@ async function capture(page, name, path, viewport) {
     });
     return visibleImages.every((image) => image.complete && image.naturalWidth > 0);
   });
-  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-  if (overflow > 3) {
-    throw new Error(`${name}: overflow horizontal de ${overflow}px`);
-  }
+  await auditPage(page, name);
   await page.screenshot({ path: `qa/screenshots/${name}.png`, fullPage: false });
   checks.push({ name, path, viewport, status: "ok" });
 }
@@ -72,22 +159,7 @@ async function probe(page, name, path, viewport) {
     throw new Error(`${name}: HTTP ${response?.status() ?? "unknown"} sur ${path}`);
   }
   await page.locator("body").waitFor({ state: "visible" });
-  const result = await page.evaluate(() => {
-    const overflow = document.documentElement.scrollWidth - document.documentElement.clientWidth;
-    const brokenImages = Array.from(document.images)
-      .filter((image) => image.complete && image.naturalWidth === 0)
-      .map((image) => image.getAttribute("src") ?? "");
-    const interactiveWithoutName = Array.from(document.querySelectorAll("a, button, input, select, textarea"))
-      .filter((element) => {
-        if ("labels" in element && element.labels?.length) return false;
-        const label = element.getAttribute("aria-label") || element.textContent || element.getAttribute("placeholder") || element.getAttribute("title");
-        return !String(label ?? "").trim();
-      }).length;
-    return { overflow, brokenImages, interactiveWithoutName };
-  });
-  if (result.overflow > 3) throw new Error(`${name}: overflow horizontal de ${result.overflow}px`);
-  if (result.brokenImages.length) throw new Error(`${name}: image cassee ${result.brokenImages[0]}`);
-  if (result.interactiveWithoutName) throw new Error(`${name}: ${result.interactiveWithoutName} controle(s) sans nom accessible`);
+  await auditPage(page, name);
   checks.push({ name, path, viewport, status: "ok" });
 }
 
@@ -95,8 +167,10 @@ async function run() {
   await waitForServer();
   const browser = await chromium.launch();
   const page = await browser.newPage();
+  installBrowserGuards(page);
 
   await capture(page, "desktop-1440x900", "/", { width: 1440, height: 900 });
+  await capture(page, "desktop-1920x1080", "/", { width: 1920, height: 1080 });
   await capture(page, "laptop-1366x768", "/", { width: 1366, height: 768 });
   await capture(page, "tablet-1024x768", "/catalogue", { width: 1024, height: 768 });
   await capture(page, "tablet-768x1024", "/catalogue?certified=true", { width: 768, height: 1024 });
@@ -117,22 +191,26 @@ async function run() {
   await page.waitForURL(/\/catalogue/);
   await page.getByLabel("Type").selectOption("RED");
   await page.getByRole("button", { name: /Filtrer/i }).click();
-  await page.getByRole("heading", { name: /17 lots verifies/i }).waitFor();
+  await page.getByRole("heading", { name: /17 lots vérifiés/i }).waitFor();
   checks.push({ name: "navigation-catalogue-filtre", path: "/catalogue?type=RED", status: "ok" });
 
   await page.goto(`${baseURL}/catalogue?mode=AUCTION&certified=true`, { waitUntil: "domcontentloaded" });
-  await page.getByRole("heading", { name: /lots verifies/i }).waitFor();
+  await page.getByRole("heading", { name: /lots vérifiés/i }).waitFor();
   checks.push({ name: "catalogue-filtres-combines", path: "/catalogue?mode=AUCTION&certified=true", status: "ok" });
 
   await page.goto(`${baseURL}/connexion`, { waitUntil: "domcontentloaded" });
   await page.getByLabel("Email").fill("admin@vinovalor.local");
   await page.getByLabel("Mot de passe").fill("wrong-password");
-  await page.getByRole("button", { name: /Se connecter/i }).click();
-  await page.getByRole("alert").waitFor();
+  const loginButton = page.getByRole("button", { name: /Se connecter/i });
+  if (await loginButton.isEnabled()) {
+    await loginButton.click();
+  }
+  await page.locator(".form-message[role='alert']").first().waitFor();
   checks.push({ name: "login-erreur-accessible", path: "/connexion", status: "ok" });
 
   const matrixViewports = [
     { name: "desktop", width: 1440, height: 900 },
+    { name: "desktop-large", width: 1920, height: 1080 },
     { name: "laptop", width: 1366, height: 768 },
     { name: "tablet-landscape", width: 1024, height: 768 },
     { name: "tablet-portrait", width: 768, height: 1024 },
@@ -167,6 +245,10 @@ async function run() {
     for (const path of matrixPaths) {
       await probe(page, `matrix-${viewport.name}-${path.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "") || "home"}`, path, viewport);
     }
+  }
+
+  if (browserIssues.length) {
+    throw new Error(`Erreurs navigateur: ${JSON.stringify(browserIssues.slice(0, 5))}`);
   }
 
   await browser.close();
@@ -204,7 +286,8 @@ try {
   );
   process.exitCode = 1;
 } finally {
-  server.kill();
+  server?.kill();
   stdout.end();
   stderr.end();
+  process.exit(process.exitCode ?? 0);
 }

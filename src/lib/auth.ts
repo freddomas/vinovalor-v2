@@ -3,7 +3,8 @@ import GoogleProvider from "next-auth/providers/google";
 import type { NextAuthOptions } from "next-auth";
 import { z } from "zod";
 import { users } from "./domain";
-import { verifyPassword } from "./security";
+import { checkRateLimit } from "./rate-limit";
+import { hashIp, verifyPassword } from "./security";
 import type { CurrentUser, Role } from "./types";
 
 const localPasswordHash = "pbkdf2_sha256$210000$vinovalor-local-2026$afd912d5caf81ba7176e2e2c6cb04781c061d83fe5299fc44c515e9254b46ffa";
@@ -34,21 +35,32 @@ seededAccounts.push({
 export const demoAccounts = seededAccounts.map(({ passwordHash: _passwordHash, ...account }) => account);
 
 const authSecret = process.env.NEXTAUTH_SECRET ?? process.env.AUTH_SECRET;
+const demoCredentialsAllowed = process.env.NODE_ENV !== "production";
 
 export function hasAuthSecret(): boolean {
   return Boolean(authSecret);
 }
 
-const providers: NextAuthOptions["providers"] = [
-  CredentialsProvider({
+export function isLocalCredentialsConfigured(): boolean {
+  return demoCredentialsAllowed;
+}
+
+const providers: NextAuthOptions["providers"] = [];
+
+if (demoCredentialsAllowed) {
+  providers.push(
+    CredentialsProvider({
     name: "Compte local",
     credentials: {
       email: { label: "Email", type: "email" },
       password: { label: "Mot de passe", type: "password" }
     },
-    async authorize(credentials) {
+    async authorize(credentials, request) {
       const parsed = loginSchema.safeParse(credentials);
       if (!parsed.success) return null;
+      const sourceIp = request?.headers?.["x-forwarded-for"] ?? request?.headers?.["x-real-ip"];
+      const key = `login:${hashIp(Array.isArray(sourceIp) ? sourceIp[0] : sourceIp ?? null)}:${parsed.data.email.toLowerCase()}`;
+      if (!checkRateLimit(key, 8, 900)) return null;
       const account = seededAccounts.find((item) => item.email.toLowerCase() === parsed.data.email.toLowerCase());
       if (!account || !verifyPassword(parsed.data.password, account.passwordHash)) return null;
       return {
@@ -60,7 +72,8 @@ const providers: NextAuthOptions["providers"] = [
       };
     }
   })
-];
+  );
+}
 
 if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
   providers.push(
@@ -84,7 +97,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = (user as CurrentUser).role ?? "buyer";
+        token.role = (user as CurrentUser).role ?? "guest";
         token.isCertified = Boolean((user as CurrentUser).isCertified);
       }
       return token;
@@ -92,7 +105,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.sub ?? "";
-        session.user.role = (token.role as Role | undefined) ?? "buyer";
+        session.user.role = (token.role as Role | undefined) ?? "guest";
         session.user.isCertified = Boolean(token.isCertified);
       }
       return session;

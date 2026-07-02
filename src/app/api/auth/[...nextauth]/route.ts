@@ -13,7 +13,7 @@ function authNotConfiguredResponse() {
   return NextResponse.json(
     {
       code: "AUTH_NOT_CONFIGURED",
-      message: "Authentification serveur non configuree. Renseigner NEXTAUTH_SECRET ou AUTH_SECRET sur Vercel."
+      message: "Authentification serveur non configurée. Renseigner NEXTAUTH_SECRET ou AUTH_SECRET sur Vercel."
     },
     { status: 503, headers: securityHeaders() }
   );

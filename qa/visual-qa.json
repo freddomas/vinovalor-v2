@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "generatedAt": "2026-07-01T00:08:18.132Z",
+  "generatedAt": "2026-07-02T23:46:44.829Z",
   "baseURL": "http://127.0.0.1:3100",
   "checks": [
     {
@@ -9,6 +9,15 @@
       "viewport": {
         "width": 1440,
         "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "desktop-1920x1080",
+      "path": "/",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
       },
       "status": "ok"
     },
@@ -321,6 +330,186 @@
         "name": "desktop",
         "width": 1440,
         "height": 900
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-home",
+      "path": "/",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-catalogue",
+      "path": "/catalogue",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-catalogue-type-RED",
+      "path": "/catalogue?type=RED",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-catalogue-mode-AUCTION",
+      "path": "/catalogue?mode=AUCTION",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-catalogue-certified-true",
+      "path": "/catalogue?certified=true",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-catalogue-region-bordeaux",
+      "path": "/catalogue?region=bordeaux",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-catalogue-maxPrice-100",
+      "path": "/catalogue?maxPrice=100",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-catalogue-q-hennessy",
+      "path": "/catalogue?q=hennessy",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-catalogue-q-aucun-resultat-probable",
+      "path": "/catalogue?q=aucun-resultat-probable",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-annonces-9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "path": "/annonces/9064f9bc-cb7e-4d2d-8bb7-f08cd021aab4",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-annonces-6129cefb-140a-4358-80c0-687e30210c35",
+      "path": "/annonces/6129cefb-140a-4358-80c0-687e30210c35",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-restaurants",
+      "path": "/restaurants",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-restaurants-138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "path": "/restaurants/138a09dd-1a12-4b06-b77c-d854319af8f5",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-encheres",
+      "path": "/encheres",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-vendre",
+      "path": "/vendre",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-connexion",
+      "path": "/connexion",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-espace",
+      "path": "/espace",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
+      },
+      "status": "ok"
+    },
+    {
+      "name": "matrix-desktop-large-admin",
+      "path": "/admin",
+      "viewport": {
+        "name": "desktop-large",
+        "width": 1920,
+        "height": 1080
       },
       "status": "ok"
     },

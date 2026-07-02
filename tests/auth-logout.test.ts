@@ -5,14 +5,25 @@ import { GET, POST } from "@/app/api/auth/logout/route";
 const logoutUrl = "https://vinovalor-v2.vercel.app/api/auth/logout";
 
 describe("logout Vinovalor", () => {
-  it("redirige vers la connexion en GET et POST", async () => {
-    const getResponse = await GET(new NextRequest(logoutUrl, { method: "GET" }));
+  it("refuse GET et redirige vers la connexion en POST", async () => {
+    const getResponse = await GET();
     const postResponse = await POST(new NextRequest(logoutUrl, { method: "POST" }));
 
-    expect(getResponse.status).toBe(303);
+    expect(getResponse.status).toBe(405);
     expect(postResponse.status).toBe(303);
-    expect(getResponse.headers.get("location")).toBe("https://vinovalor-v2.vercel.app/connexion");
     expect(postResponse.headers.get("location")).toBe("https://vinovalor-v2.vercel.app/connexion");
+  });
+
+  it("refuse un POST cross-site", async () => {
+    const response = await POST(
+      new NextRequest(logoutUrl, {
+        method: "POST",
+        headers: { origin: "https://attacker.example", "sec-fetch-site": "cross-site" }
+      })
+    );
+
+    expect(response.status).toBe(403);
+    await expect(response.json()).resolves.toMatchObject({ message: "Origine non autorisée." });
   });
 
   it("expire les cookies de session connus", async () => {

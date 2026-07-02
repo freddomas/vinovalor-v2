@@ -10,6 +10,7 @@ playwright-report/
 debug.log
 tsconfig.tsbuildinfo
 artifacts.Path/
+artifacts/extra/
 .env
 .env*.local
 !.env.example

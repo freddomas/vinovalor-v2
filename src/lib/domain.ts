@@ -16,24 +16,59 @@ export const alcoholWarning =
 export const wineTypeLabels: Record<WineType, string> = {
   RED: "Rouge",
   WHITE: "Blanc",
-  ROSE: "Rose",
+  ROSE: "Rosé",
   SPARKLING: "Effervescent",
   COGNAC: "Cognac",
   WHISKY: "Whisky",
-  SAKE: "Sake"
+  SAKE: "Saké"
 };
 
 export const roleLabels: Record<Role, string> = {
-  guest: "Invite",
+  guest: "Invité",
   buyer: "Acheteur",
   seller: "Vendeur",
-  certified_seller: "Vendeur certifie",
+  certified_seller: "Vendeur certifié",
   restaurant_owner: "Restaurateur",
-  restaurant_staff: "Equipe restaurant",
-  moderator: "Moderation",
+  restaurant_staff: "Équipe restaurant",
+  moderator: "Modération",
   admin: "Administration",
   support: "Support"
 };
+
+export const reservationJourney = [
+  {
+    step: "01",
+    title: "Découvrir",
+    text: "Rechercher un vin, un domaine, un millésime ou une cave d'établissement."
+  },
+  {
+    step: "02",
+    title: "Choisir",
+    text: "Comparer la bouteille, le stock, la preuve, le prix et l'adresse qui la propose."
+  },
+  {
+    step: "03",
+    title: "Réserver",
+    text: "Associer bouteille, table, date, heure et nombre de convives dans le même geste."
+  },
+  {
+    step: "04",
+    title: "Sécuriser",
+    text: "Préparer le paiement et la garantie sans promettre l'escrow tant que le provider n'est pas branché."
+  },
+  {
+    step: "05",
+    title: "Déguster",
+    text: "La bouteille devient la raison de venir, puis l'expérience à table prend le relais."
+  }
+];
+
+export const partnerValuePillars = [
+  "Cave transformée en moteur de réservation",
+  "Panier moyen porté par la bouteille choisie avant venue",
+  "Sommeliers et accords mets-vins rendus visibles",
+  "Dashboard pro pour cave, ventes, réservations et clientèle"
+];
 
 export const listings = rawListings as Listing[];
 export const restaurants = rawRestaurants as Restaurant[];
@@ -93,18 +128,18 @@ export function formatCurrency(value: number | string | null | undefined): strin
 export function toCents(value: number | string): number {
   const amount = typeof value === "string" ? Number(value.replace(",", ".")) : value;
   if (!Number.isFinite(amount) || amount <= 0) {
-    throw new Error("Le prix doit etre positif.");
+    throw new Error("Le prix doit être positif.");
   }
   return Math.round(amount * 100);
 }
 
 export function formatRegion(region: string | null | undefined): string {
-  if (!region) return "Region non renseignee";
+  if (!region) return "Région non renseignée";
   const exceptions: Record<string, string> = {
-    rhone: "Rhone",
+    rhone: "Rhône",
     "sud-ouest": "Sud-Ouest",
     japan: "Japon",
-    scotland: "Ecosse",
+    scotland: "Écosse",
     morocco: "Maroc"
   };
   return exceptions[region] ?? region.charAt(0).toUpperCase() + region.slice(1);
@@ -204,6 +239,10 @@ export function getRestaurantListings(id: string): EnrichedListing[] {
   return getListings().filter((listing) => listing.restaurantId === id);
 }
 
+export function getRestaurantBottleCount(id: string): number {
+  return getRestaurantListings(id).reduce((sum, listing) => sum + Math.max(listing.quantity, 0), 0);
+}
+
 export function getSellerById(id: string): PublicUser | undefined {
   return users.find((user) => user.id === id);
 }
@@ -248,9 +287,9 @@ export function assertListingCanBePublished(input: {
 }): true {
   if (!cleanName(input.wineName)) throw new Error("Le nom de la bouteille est obligatoire.");
   if (!wineTypeLabels[input.wineType]) throw new Error("Le type de produit est invalide.");
-  if (toCents(input.price) <= 0) throw new Error("Le prix doit etre positif.");
-  if (!Number.isInteger(input.quantity) || input.quantity <= 0) throw new Error("La quantite doit etre un entier positif.");
-  if (!["GOOD", "EXCELLENT"].includes(input.condition)) throw new Error("L'etat de la bouteille est invalide.");
+  if (toCents(input.price) <= 0) throw new Error("Le prix doit être positif.");
+  if (!Number.isInteger(input.quantity) || input.quantity <= 0) throw new Error("La quantité doit être un entier positif.");
+  if (!["GOOD", "EXCELLENT"].includes(input.condition)) throw new Error("L'état de la bouteille est invalide.");
   if (!["FIXED", "AUCTION"].includes(input.saleMode)) throw new Error("Le mode de vente est invalide.");
   if (!input.evinMessage || normalizeText(input.evinMessage).length < 20) throw new Error("Le message sanitaire est obligatoire.");
   return true;
@@ -269,9 +308,9 @@ export function can(role: Role, action: "buy" | "sell" | "bid" | "moderate" | "a
 }
 
 export function validateBid(currentPriceCents: number, nextBidCents: number, userRole: Role): true {
-  if (!can(userRole, "bid")) throw new Error("Vous devez etre connecte avec un compte autorise pour encherir.");
+  if (!can(userRole, "bid")) throw new Error("Vous devez être connecté avec un compte autorisé pour enchérir.");
   if (!Number.isInteger(nextBidCents) || nextBidCents <= currentPriceCents) {
-    throw new Error("L'enchere doit etre strictement superieure au prix courant.");
+    throw new Error("L'enchère doit être strictement supérieure au prix courant.");
   }
   return true;
 }

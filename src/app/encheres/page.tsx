@@ -3,7 +3,7 @@ import { ListingCard } from "@/components/ListingCard";
 import { formatCurrency, getAuctions } from "@/lib/domain";
 
 export const metadata = {
-  title: "Encheres"
+  title: "Enchères"
 };
 
 export default function AuctionsPage() {
@@ -14,14 +14,14 @@ export default function AuctionsPage() {
     <>
       <section className="auction-hero">
         <div>
-          <p className="eyebrow">Encheres verifiees</p>
-          <h1>Lots rares sous controle serveur</h1>
+          <p className="eyebrow">Enchères vérifiées</p>
+          <h1>Lots rares sous contrôle serveur</h1>
           <p>
-            Pas de fausse horloge : les donnees actuelles exposent le prix courant, la preuve et la validation serveur.
-            La cloture temps reel devra etre branchee avant production transactionnelle.
+            Pas de fausse horloge : les données actuelles exposent le prix courant, la preuve et la validation serveur.
+            La clôture temps réel devra être branchée avant production transactionnelle.
           </p>
         </div>
-        <div className="auction-board" aria-label="Resume encheres">
+        <div className="auction-board" aria-label="Résumé enchères">
           <div>
             <Gavel aria-hidden="true" />
             <span>Lots actifs</span>
@@ -34,8 +34,8 @@ export default function AuctionsPage() {
           </div>
           <div>
             <ServerCog aria-hidden="true" />
-            <span>Regle</span>
-            <strong>Offre superieure</strong>
+            <span>Règle</span>
+            <strong>Offre supérieure</strong>
           </div>
         </div>
       </section>

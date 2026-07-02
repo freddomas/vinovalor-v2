@@ -35,13 +35,13 @@ export default async function CataloguePage({ searchParams }: { searchParams: Se
         <div className="page-hero__inner page-hero__grid">
           <div>
             <p className="eyebrow">Catalogue</p>
-            <h1>{listings.length} lots verifies</h1>
+            <h1>{listings.length} lots vérifiés</h1>
             <p>
-              Une grille de decision, pas un mur d'images : preuve, etat, vendeur, quantite, prix et mode de vente
+              Une grille de décision, pas un mur d'images : preuve, état, vendeur, quantité, prix et mode de vente
               restent visibles avant l'ouverture d'une fiche.
             </p>
           </div>
-          <div className="hero-ledger" aria-label="Resume catalogue">
+          <div className="hero-ledger" aria-label="Résumé catalogue">
             <div>
               <span>Valeur suivie</span>
               <strong>{formatCurrency(metrics.totalValueCents / 100)}</strong>
@@ -51,25 +51,27 @@ export default async function CataloguePage({ searchParams }: { searchParams: Se
               <strong>{metrics.averageTrust}/100</strong>
             </div>
             <div>
-              <span>Vendeurs certifies</span>
+              <span>Vendeurs certifiés</span>
               <strong>{metrics.certifiedSellers}</strong>
             </div>
           </div>
         </div>
       </section>
+
       <section className="section catalogue-section">
+        <FilterBar defaults={defaults} />
         <div className="catalogue-toolbar">
           <div>
             <p className="eyebrow">Recherche</p>
-            <h2>Affiner sans perdre la lecture du marche</h2>
+            <h2>{hasFilter(defaults) ? `${listings.length} résultat${listings.length > 1 ? "s" : ""}` : "Affiner sans perdre la lecture du marché"}</h2>
           </div>
           {hasFilter(defaults) ? (
             <a className="button button--ghost" href="/catalogue">
-              Reinitialiser
+              Réinitialiser
             </a>
           ) : null}
         </div>
-        <FilterBar defaults={defaults} />
+
         {listings.length ? (
           <div className="grid-listings">
             {listings.map((listing) => (
@@ -78,8 +80,8 @@ export default async function CataloguePage({ searchParams }: { searchParams: Se
           </div>
         ) : (
           <div className="empty-state">
-            <strong>Aucun lot ne correspond a ces criteres.</strong>
-            <span>Elargissez la region, le mode de vente ou le prix maximum pour retrouver des annonces actives.</span>
+            <strong>Aucun lot ne correspond à ces critères.</strong>
+            <span>Élargissez la région, le mode de vente ou le prix maximum pour retrouver des annonces actives.</span>
           </div>
         )}
       </section>

@@ -8,10 +8,10 @@ test("navigation principale et catalogue", async ({ page }) => {
     ? desktopNav.getByRole("link", { name: "Acheter" })
     : page.locator(".topbar__actions").getByRole("link", { name: /Rechercher/i });
   await Promise.all([page.waitForURL(/\/catalogue/), navigationTarget.click()]);
-  await expect(page.getByRole("heading", { name: /lots verifies/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /lots vérifiés/i })).toBeVisible();
   await page.getByLabel("Type").selectOption("RED");
   await page.getByRole("button", { name: /filtrer/i }).click();
-  await expect(page.getByRole("heading", { name: /17 lots verifies/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /17 lots vérifiés/i })).toBeVisible();
   await expect(page.getByRole("article").filter({ hasText: "Rouge" }).first()).toBeVisible();
 });
 
@@ -23,7 +23,7 @@ test("fiche annonce expose prix, preuve et actions", async ({ page }) => {
   await expect(page.getByRole("main").getByRole("link", { name: "Acheter" })).toBeVisible();
 });
 
-test("routes protegees contextualisent la connexion", async ({ page }) => {
+test("routes protégées contextualisent la connexion", async ({ page }) => {
   await page.goto("/vendre", { waitUntil: "domcontentloaded" });
   await expect(page.getByText(/Connexion requise/i)).toBeVisible();
   await page.goto("/admin", { waitUntil: "domcontentloaded" });

@@ -12,7 +12,7 @@ import {
 import { hashPassword, verifyPassword } from "@/lib/security";
 
 describe("domaine Vinovalor", () => {
-  it("conserve les volumes verifies de la capture", () => {
+  it("conserve les volumes vérifiés de la capture", () => {
     const metrics = getDashboardMetrics();
     expect(metrics.listings).toBe(41);
     expect(metrics.restaurants).toBe(6);
@@ -28,7 +28,7 @@ describe("domaine Vinovalor", () => {
     expect(results.every((listing) => listing.saleMode === "FIXED")).toBe(true);
   });
 
-  it("refuse les annonces sans prix ou quantite positive", () => {
+  it("refuse les annonces sans prix ou quantité positive", () => {
     expect(() =>
       assertListingCanBePublished({
         wineName: "Test",
@@ -51,7 +51,7 @@ describe("domaine Vinovalor", () => {
         saleMode: "FIXED",
         evinMessage: "Message sanitaire obligatoire pour la vente alcool."
       })
-    ).toThrow(/quantite/i);
+    ).toThrow(/quantité/i);
   });
 
   it("valide une annonce minimale publiable", () => {
@@ -75,10 +75,10 @@ describe("domaine Vinovalor", () => {
     expect(can("admin", "admin")).toBe(true);
   });
 
-  it("exige une enchere strictement superieure", () => {
+  it("exige une enchère strictement supérieure", () => {
     const auction = getAuctions()[0];
     expect(auction).toBeDefined();
-    expect(() => validateBid(auction.priceCents, auction.priceCents, "buyer")).toThrow(/superieure/i);
+    expect(() => validateBid(auction.priceCents, auction.priceCents, "buyer")).toThrow(/supérieure/i);
     expect(validateBid(auction.priceCents, auction.priceCents + 100, "buyer")).toBe(true);
   });
 

@@ -26,8 +26,8 @@ export function FilterBar({
         </button>
       </div>
       <div className="filterbar__secondary">
-        <select name="region" defaultValue={defaults.region ?? ""} aria-label="Region">
-          <option value="">Toutes regions</option>
+        <select name="region" defaultValue={defaults.region ?? ""} aria-label="Région">
+          <option value="">Toutes régions</option>
           {regions.map((region) => (
             <option key={region} value={region}>
               {region}
@@ -37,11 +37,11 @@ export function FilterBar({
         <select name="mode" defaultValue={defaults.mode ?? ""} aria-label="Mode de vente">
           <option value="">Tous modes</option>
           <option value="FIXED">Prix fixe</option>
-          <option value="AUCTION">Enchere</option>
+          <option value="AUCTION">Enchère</option>
         </select>
         <select name="certified" defaultValue={defaults.certified ?? ""} aria-label="Certification vendeur">
           <option value="">Tous vendeurs</option>
-          <option value="true">Certifies uniquement</option>
+          <option value="true">Certifiés uniquement</option>
         </select>
         <input name="maxPrice" inputMode="numeric" defaultValue={defaults.maxPrice} placeholder="Prix max" aria-label="Prix maximum" />
       </div>

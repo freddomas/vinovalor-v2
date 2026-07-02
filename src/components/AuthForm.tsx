@@ -4,7 +4,17 @@ import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
 import { LogIn } from "lucide-react";
 
-export function AuthForm({ authEnabled, googleEnabled }: { authEnabled: boolean; googleEnabled: boolean }) {
+export function AuthForm({
+  authEnabled,
+  googleEnabled,
+  localEnabled,
+  callbackUrl
+}: {
+  authEnabled: boolean;
+  googleEnabled: boolean;
+  localEnabled: boolean;
+  callbackUrl: string;
+}) {
   const [hydrated, setHydrated] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
@@ -16,7 +26,11 @@ export function AuthForm({ authEnabled, googleEnabled }: { authEnabled: boolean;
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!authEnabled) {
-      setMessage("Authentification non configuree sur ce deploiement. Ajouter NEXTAUTH_SECRET ou AUTH_SECRET dans Vercel.");
+      setMessage("Authentification non configurée sur ce déploiement. Ajouter NEXTAUTH_SECRET ou AUTH_SECRET dans Vercel.");
+      return;
+    }
+    if (!localEnabled) {
+      setMessage("Les comptes locaux de démonstration sont désactivés en production.");
       return;
     }
 
@@ -27,11 +41,11 @@ export function AuthForm({ authEnabled, googleEnabled }: { authEnabled: boolean;
       email: String(form.get("email") ?? ""),
       password: String(form.get("password") ?? ""),
       redirect: false,
-      callbackUrl: "/espace"
+      callbackUrl
     });
     setPending(false);
     if (result?.ok) {
-      window.location.href = "/espace";
+      window.location.href = callbackUrl;
       return;
     }
     setMessage("Identifiants invalides ou compte non autorisé.");
@@ -50,13 +64,18 @@ export function AuthForm({ authEnabled, googleEnabled }: { authEnabled: boolean;
           <label htmlFor="password">Mot de passe</label>
           <input id="password" name="password" type="password" autoComplete="current-password" required />
         </div>
-        <button className="button" type="submit" disabled={pending || !authEnabled || !hydrated} style={{ gridColumn: "1 / -1" }}>
+        <button className="button" type="submit" disabled={pending || !authEnabled || !localEnabled || !hydrated} style={{ gridColumn: "1 / -1" }}>
           <LogIn size={17} aria-hidden="true" /> {pending ? "Connexion..." : "Se connecter"}
         </button>
       </form>
       {!authEnabled ? (
         <p className="form-message form-message--error" role="alert">
-          Authentification non configuree sur ce deploiement. Ajouter NEXTAUTH_SECRET ou AUTH_SECRET dans Vercel.
+          Authentification non configurée sur ce déploiement. Ajouter NEXTAUTH_SECRET ou AUTH_SECRET dans Vercel.
+        </p>
+      ) : null}
+      {authEnabled && !localEnabled ? (
+        <p className="form-message form-message--error" role="alert">
+          Comptes locaux de démonstration désactivés en production.
         </p>
       ) : null}
       {message ? <p className="form-message form-message--error" role="alert">{message}</p> : null}
@@ -65,7 +84,7 @@ export function AuthForm({ authEnabled, googleEnabled }: { authEnabled: boolean;
         className="button button--ghost"
         type="button"
         disabled={!googleEnabled || !authEnabled || !hydrated}
-        onClick={() => signIn("google", { callbackUrl: "/espace" })}
+        onClick={() => signIn("google", { callbackUrl })}
         style={{ width: "100%" }}
       >
         Continuer avec Google

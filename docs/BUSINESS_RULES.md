@@ -1,38 +1,30 @@
 # Règles Métier
 
-## VERIFIED RULE
+## Positionnement Vérifié
 
-- Vinovalor est une marketplace d'alcools premium, pas seulement un site vitrine.
-- Données capturées : 41 annonces, 6 restaurants, 15 utilisateurs publics.
-- Modes capturés : 37 ventes fixes, 4 enchères.
-- Types capturés : rouge, blanc, rosé, effervescent, cognac, whisky, saké.
-- Google OAuth existe comme flux observé ; l'app v2 l'active quand les variables Google sont présentes.
+- Vinovalor v2 reste une preview marketplace premium d'alcools, pas une marketplace transactionnelle production-ready.
+- Les données locales exposent 41 annonces, 6 restaurants et 15 profils publics.
+- Le périmètre produit couvre vin, champagne, cognac, whisky et saké.
+- Les visuels exploitables restent dans `public/media/wines`; `artifacts/extra` sert d'inspiration métier et ne doit pas être exporté.
 
-## DERIVED RULE
+## Upgrade Métier Appliqué
+
+- La proposition centrale devient `Vinovalor / La bouteille qui vous mène à table`.
+- Le restaurant n'est plus un module décoratif : les fiches et la page restaurants relient cave, table, accord et lots disponibles.
+- Les annonces associées à un restaurant proposent un CTA de préparation de réservation.
+- Les annonces hors restaurant restent orientées achat, offre ou enchère selon leur mode.
+- Le catalogue privilégie la décision : preuve, état, vendeur, stock, mode de vente, certification et prix restent visibles avant ouverture d'une fiche.
+
+## Règles Serveur
 
 - Une annonce publiable exige nom produit, type, prix positif, quantité positive, état, mode de vente et message sanitaire.
-- Une annonce avec quantité nulle doit être traitée comme stock à confirmer, pas comme achat fiable.
-- Une offre exige un acheteur connecté, une annonce ouverte aux offres, un montant positif et une vérification serveur.
+- Une quantité nulle est traitée comme `Stock à confirmer`, jamais comme disponibilité fiable.
+- Une offre exige un acheteur connecté, une annonce ouverte aux offres, un montant positif et une validation serveur.
 - Une enchère exige un utilisateur autorisé, un montant strictement supérieur au prix courant et une transaction atomique en production.
-- Les profils publics doivent rester limités : pas d'email, téléphone, adresse privée ni données sensibles.
-- Les actions sensibles doivent être auditables : auth, publication, offre, enchère, modération, paiement.
+- Les profils publics ne doivent pas exposer email, téléphone, adresse privée ou données sensibles.
 
-## ASSUMPTION
+## Limites Production
 
-- Le périmètre initial reste alcools premium, pas vin uniquement, car les données contiennent cognac, whisky et saké.
-- Les restaurants sont conservés comme module différenciant, mais pas comme coeur transactionnel prioritaire.
-- Le paiement réel n'est pas activé tant que le pays cible et le provider compatible alcool ne sont pas validés.
-
-## RISK
-
-- Le nom Vinovalor surpromet si aucun module de valorisation, preuve de provenance ou historique prix n'est ajouté.
-- Une marketplace alcool sans contrôle âge/pays/licence/paiement expose un risque légal réel.
-- Les enchères sans transaction DB atomique exposent race conditions et litiges.
-
-## OPEN QUESTION
-
-- Pays cible exact et licence alcool.
-- Provider paiement et statut marketplace/séquestre.
-- Niveau KYC vendeur attendu.
-- Politique livraison alcool.
-- Documents obligatoires de provenance.
+- La réservation visible est une préparation d'intention, pas une réservation durable.
+- Le paiement, la conformité alcool, l'upload sécurisé et la persistance Postgres restent des prérequis avant toute transaction réelle.
+- Les calculs de valeur restent des scores de présentation, pas une cotation de marché vérifiée.

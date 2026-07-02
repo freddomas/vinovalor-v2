@@ -1,22 +1,29 @@
 # Audit UI/UX
 
-## Problèmes corrigés
+## Refonte Appliquée
 
-- Navigation basse supprimée du desktop.
-- Routes protégées contextualisées : vendre/admin/espace.
-- Catalogue enrichi avec preuve, score, stock, vendeur et mode de vente.
-- Visuels distants remplacés par copies locales améliorées pour éviter les ruptures réseau.
-- Textes techniques retirés de l'écran connexion.
-- Bouton connexion rendu lisible sur topbar sombre.
-- Stock zéro affiché comme `Stock à confirmer`.
+- Accueil reconstruit autour d'un parcours clair : bouteille, cave, table, partenaire.
+- Hero renforcé avec signal produit immédiat, recherche, preuve et accès catalogue.
+- Page restaurants transformée en expérience `choisir une table par sa cave`.
+- Fiches annonces enrichies avec CTA contextuel achat, enchère ou préparation de réservation.
+- Catalogue remonté comme surface de décision : filtres visibles, métriques compactes, reset clair, état vide exploitable.
+- Barre mobile stabilisée pour éviter les recouvrements de contrôles interactifs.
+- Breakpoint 320px corrigé : les filtres secondaires deviennent un rail horizontal pour préserver l'accès sans masquer des champs sous la navigation.
 
-## Points encore faibles
+## Garde-Fous
 
-- Les données capturées restent incomplètes sur provenance et documents réels.
-- La promesse de valorisation exige un module prix marché/historique non encore implémenté.
-- Le mobile utilise une nav basse fixe : utilisable, mais une bottom sheet de filtres serait meilleure en phase suivante.
+- Pas de texte marketing prétendant que la marketplace est prête pour transactions réelles.
+- Pas de héros décoratif abstrait : les pages s'appuient sur visuels et données produit.
+- Les cartes restent informatives, pas seulement esthétiques.
+- Les composants mobiles évitent les recouvrements détectés par Playwright.
+
+## Limites
+
+- La réservation reste une préfiguration UI sans écriture durable.
+- Le module de valorisation prix marché reste à construire si l'objectif devient la cotation réelle.
+- Une bottom sheet de filtres serait meilleure qu'un rail horizontal pour une phase post-preview.
 
 ## Preuves
 
-- Captures finales : `qa/screenshots/`.
-- Manifeste QA : `qa/visual-qa.json`.
+- Captures : `qa/screenshots/`.
+- Manifeste : `qa/visual-qa.json`.

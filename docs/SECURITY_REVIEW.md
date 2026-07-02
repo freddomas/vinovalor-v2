@@ -1,26 +1,32 @@
 # Revue Sécurité
 
-## Contrôles en place
+## Contrôles Renforcés
 
-- Pas de secrets dans le dépôt.
-- `.env.example` documente les variables.
-- Sessions NextAuth en cookie HttpOnly.
-- Credentials locaux validés par hash PBKDF2.
-- Google OAuth désactivé sans secrets, activable par variables.
-- APIs mutatives protégées par session et RBAC serveur.
-- Validation Zod aux frontières API.
-- Rate limiting mémoire sur publication, offres et enchères.
-- Headers `no-store`, `nosniff`, `Referrer-Policy`.
-- Audit high/critical npm : OK.
+- Les comptes locaux de démonstration sont désactivés en production.
+- Les utilisateurs OAuth reçoivent le rôle minimal `guest` par défaut, pas un rôle acheteur.
+- Les tentatives de connexion credentials sont soumises au rate limiting.
+- Les routes mutatives vérifient l'origine avant traitement.
+- Les corps JSON invalides retournent une réponse contrôlée au lieu de faire tomber la route.
+- `GET /api/auth/logout` retourne `405`; la déconnexion mutative passe par `POST`.
+- Les validations métier renvoient des erreurs 4xx explicites au lieu de 500 génériques.
+- Les headers de sécurité incluent `nosniff`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, `Cross-Origin-Opener-Policy`, `X-DNS-Prefetch-Control`, `frame-ancestors`, `base-uri`, `object-src` et HSTS.
 
-## Risques restants
+## Tests Ajoutés
 
-- 2 vulnérabilités modérées npm liées à `next-auth` / `uuid`; `npm audit fix --force` propose un downgrade majeur non acceptable.
+- Headers de sécurité.
+- Origine cross-site refusée.
+- Credentials provider désactivé en production.
+- Rôle OAuth par défaut `guest`.
+- Logout `GET` refusé, logout `POST` accepté, logout cross-site refusé.
+
+## Risques Restants
+
 - Rate limiting mémoire insuffisant en serverless multi-instance.
-- Pas encore de CSRF dédié au-delà du modèle NextAuth/cookies.
-- Pas d'upload réel, donc pas encore de scan MIME/virus/metadata.
-- Pas de transactions DB atomiques pour enchères/offres tant que Postgres n'est pas branché.
+- Pas encore de Postgres, transactions atomiques ni audit log durable.
+- Pas encore d'upload réel, donc pas de scan MIME/virus/métadonnées.
+- Pas encore de provider paiement compatible alcool.
+- Deux vulnérabilités npm modérées liées à `next-auth` / `uuid`; `npm audit fix --force` force un changement majeur non acceptable.
 
 ## Verdict
 
-Aucun risque high/critical détecté dans la base livrée. Pas prêt pour transactions réelles sans DB, paiement, conformité et upload sécurisé.
+Aucun high/critical connu après `npm audit --audit-level=high`. L'application est renforcée pour une preview publique, mais elle n'est pas prête pour transactions alcool réelles.
