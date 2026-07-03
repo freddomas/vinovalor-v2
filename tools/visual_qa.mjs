@@ -57,6 +57,16 @@ function isExpectedHttpError(response) {
   return status === 401 && url.includes("/api/auth/callback/credentials");
 }
 
+function isExpectedConsoleError(message) {
+  const text = message.text();
+  const locationUrl = message.location().url;
+  return (
+    text.includes("Failed to load resource") &&
+    text.includes("401 (Unauthorized)") &&
+    locationUrl.includes("/api/auth/callback/credentials")
+  );
+}
+
 function isExpectedRequestFailure(request) {
   const url = request.url();
   const failure = request.failure()?.errorText ?? "";
@@ -66,7 +76,7 @@ function isExpectedRequestFailure(request) {
 
 function installBrowserGuards(page) {
   page.on("console", (message) => {
-    if (message.type() === "error") {
+    if (message.type() === "error" && !isExpectedConsoleError(message)) {
       browserIssues.push({ type: "console.error", text: message.text() });
     }
   });

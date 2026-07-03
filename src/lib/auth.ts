@@ -35,7 +35,7 @@ seededAccounts.push({
 export const demoAccounts = seededAccounts.map(({ passwordHash: _passwordHash, ...account }) => account);
 
 const authSecret = process.env.NEXTAUTH_SECRET ?? process.env.AUTH_SECRET;
-const demoCredentialsAllowed = process.env.NODE_ENV !== "production";
+const demoCredentialsAllowed = process.env.DISABLE_LOCAL_CREDENTIALS !== "true";
 
 export function hasAuthSecret(): boolean {
   return Boolean(authSecret);

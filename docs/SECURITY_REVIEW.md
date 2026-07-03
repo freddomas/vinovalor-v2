@@ -2,7 +2,8 @@
 
 ## Contrôles Renforcés
 
-- Les comptes locaux de démonstration sont désactivés en production.
+- Les comptes locaux de démonstration sont actifs sur la preview publique à la demande du propriétaire du projet.
+- Ils peuvent être coupés sans changement de code avec `DISABLE_LOCAL_CREDENTIALS=true`.
 - Les utilisateurs OAuth reçoivent le rôle minimal `guest` par défaut, pas un rôle acheteur.
 - Les tentatives de connexion credentials sont soumises au rate limiting.
 - Les routes mutatives vérifient l'origine avant traitement.
@@ -15,7 +16,7 @@
 
 - Headers de sécurité.
 - Origine cross-site refusée.
-- Credentials provider désactivé en production.
+- Credentials provider actif pour la preview publique et désactivable par variable d'environnement.
 - Rôle OAuth par défaut `guest`.
 - Logout `GET` refusé, logout `POST` accepté, logout cross-site refusé.
 

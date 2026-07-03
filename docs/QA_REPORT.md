@@ -18,7 +18,7 @@ Le script `qa:visual` exécute une matrice desktop, laptop, tablette, mobile, mo
 ## Couverture Ciblée
 
 - Règles métier catalogue, prix, quantité, publication, RBAC, enchère et conversion en centimes.
-- Sécurité auth/logout, headers, origine, provider credentials production et rôle OAuth par défaut.
+- Sécurité auth/logout, headers, origine, provider credentials preview/désactivation explicite et rôle OAuth par défaut.
 - Navigation catalogue et filtres combinés.
 - Rendu visuel accueil, catalogue, fiche annonce, restaurants, enchères, vente, connexion, espace et admin.
 

@@ -36,6 +36,7 @@ npm run dev
 Variables utiles : voir `.env.example`.
 
 Comptes locaux : tous les comptes locaux utilisent le mot de passe `demo2026!`.
+Sur la preview publique, ces comptes locaux sont volontairement actifs pour les tests. Pour les couper sans changer le code, définir `DISABLE_LOCAL_CREDENTIALS=true`.
 
 Compte administrateur local :
 

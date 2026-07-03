@@ -30,7 +30,7 @@ export function AuthForm({
       return;
     }
     if (!localEnabled) {
-      setMessage("Les comptes locaux de démonstration sont désactivés en production.");
+      setMessage("Les comptes locaux de démonstration sont désactivés sur ce déploiement.");
       return;
     }
 
@@ -75,7 +75,7 @@ export function AuthForm({
       ) : null}
       {authEnabled && !localEnabled ? (
         <p className="form-message form-message--error" role="alert">
-          Comptes locaux de démonstration désactivés en production.
+          Comptes locaux de démonstration désactivés sur ce déploiement.
         </p>
       ) : null}
       {message ? <p className="form-message form-message--error" role="alert">{message}</p> : null}

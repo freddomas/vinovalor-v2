@@ -27,8 +27,18 @@ describe("sécurité applicative", () => {
     expect(() => assertSameOrigin(request)).toThrow(/cross-site|Origine/i);
   });
 
-  it("désactive les comptes credentials démo en production", async () => {
+  it("garde les comptes credentials démo actifs pour la preview publique", async () => {
     vi.stubEnv("NODE_ENV", "production");
+    vi.resetModules();
+
+    const { authOptions } = await import("@/lib/auth");
+
+    expect(authOptions.providers.some((provider) => provider.id === "credentials")).toBe(true);
+  });
+
+  it("permet de désactiver explicitement les comptes credentials démo", async () => {
+    vi.stubEnv("NODE_ENV", "production");
+    vi.stubEnv("DISABLE_LOCAL_CREDENTIALS", "true");
     vi.resetModules();
 
     const { authOptions } = await import("@/lib/auth");
