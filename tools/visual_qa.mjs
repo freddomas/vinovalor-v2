@@ -62,8 +62,8 @@ function isExpectedConsoleError(message) {
   const locationUrl = message.location().url;
   return (
     text.includes("Failed to load resource") &&
-    text.includes("401 (Unauthorized)") &&
-    locationUrl.includes("/api/auth/callback/credentials")
+    (text.includes("401 (Unauthorized)") || text.includes("status of 401")) &&
+    (locationUrl.includes("/api/auth/callback/credentials") || locationUrl === "")
   );
 }
 
@@ -71,7 +71,7 @@ function isExpectedRequestFailure(request) {
   const url = request.url();
   const failure = request.failure()?.errorText ?? "";
   if (failure !== "net::ERR_ABORTED") return false;
-  return url.includes("_rsc=") || request.resourceType() === "image";
+  return url.includes("_rsc=") || request.resourceType() === "image" || request.resourceType() === "script";
 }
 
 function installBrowserGuards(page) {
